@@ -16,5 +16,11 @@ class ClasseDeCoursController extends AbstractController
         return $this->render('classe_de_cours/index.html.twig');
     }
 
-    
+    /**
+     * @Route("/classe/creer", name="app_classedecours_creer")
+     */
+    public function creer(): Response
+    {
+        return $this->render('classe_de_cours/creer.html.twig');
+    }
 }
