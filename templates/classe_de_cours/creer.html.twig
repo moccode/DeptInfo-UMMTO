@@ -6,4 +6,11 @@
 	<h3>
 		Créer une nouvelle classe de cours
 	</h3>
+
+	{{ form_start(formClasseDeCours) }}
+	{{ form_widget(formClasseDeCours) }}
+	<input type="submit" value="Create Pin" formnovalidate>
+	{{ form_end(formClasseDeCours) }}
+
+
 {% endblock %}
