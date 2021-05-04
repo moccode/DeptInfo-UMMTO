@@ -2,14 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use App\Repository\ClasseDeCoursRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ClasseDeCoursRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class ClasseDeCours
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,16 +31,6 @@ class ClasseDeCours
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateCreation;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateModification;
 
 
     public function getId(): ?int
@@ -63,30 +58,6 @@ class ClasseDeCours
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->dateCreation;
-    }
-
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
-    {
-        $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    public function getDateModification(): ?\DateTimeInterface
-    {
-        return $this->dateModification;
-    }
-
-    public function setDateModification(\DateTimeInterface $dateModification): self
-    {
-        $this->dateModification = $dateModification;
 
         return $this;
     }
