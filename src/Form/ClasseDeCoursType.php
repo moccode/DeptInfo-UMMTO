@@ -14,8 +14,18 @@ class ClasseDeCoursType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('description', TextareaType::class);
+            ->add('titre', TextType::class, [
+                'label' => 'Titre *',
+                'attr' => [
+                    'placeholder' => 'Donner un titre à votre classe de cours'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'Donner une description à votre classe de cours'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
