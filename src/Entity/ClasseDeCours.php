@@ -42,6 +42,12 @@ class ClasseDeCours
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="classeDeCours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $promotion;
+
 
     public function getId(): ?int
     {
@@ -68,6 +74,18 @@ class ClasseDeCours
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }
