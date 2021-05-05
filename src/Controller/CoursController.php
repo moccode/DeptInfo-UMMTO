@@ -32,7 +32,10 @@ class CoursController extends AbstractController
             $em->persist($cours);
             $em->flush();
 
-            return $this->redirectToRoute("app_classedecours_index");
+            return $this->redirectToRoute("app_cours_consulter", [
+                'id_classedecours' => $id_classedecours,
+                'id_cours' => $cours->getId()
+            ]);
         }
 
         return $this->render('cours/creer.html.twig', [
@@ -75,6 +78,21 @@ class CoursController extends AbstractController
         return $this->render('cours/editer.html.twig', [
             "cours" => $cours,
             "formCours" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/delete", name="app_cours_supprimer", methods={"DELETE"})
+     */
+    public function supprimer(int $id_cours, CoursRepository $coursRepository, EntityManagerInterface $em, int $id_classedecours): Response
+    {
+        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
+
+        $em->remove($cours);
+        $em->flush();
+
+        return $this->redirectToRoute("app_classedecours_consulter", [
+            'id_classedecours' => $id_classedecours
         ]);
     }
 }
