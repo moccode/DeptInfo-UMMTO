@@ -48,10 +48,6 @@ class ClasseDeCours
      * @Assert\NotBlank(
      *      message="Ce champ ne doit pas être vide !"
      * )
-     * @Assert\Choice(
-     *      callback={"App\Entity\Promotion", "getPromotion"},
-     *      message = "Cette n'existe pas parmi les promotions disponibles !"
-     * )
      */
     private $promotion;
 
