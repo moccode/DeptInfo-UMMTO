@@ -6,12 +6,12 @@
 
 	<h3>Mes classes de cours</h3>
 
-	<a href="{{ path('app_classedecours_creer') }}">Créeer une nouvelle classe de cours</a>
+	<a href="{{ path('app_classedecours_creer') }}">Créer une nouvelle classe de cours</a>
 	<br><br>
 
 	{% for classeDeCours in classesDeCours %}
 
-		<a href="{{ path('app_classedecours_editer', {'id' : classeDeCours.id }) }}">
+		<a href="{{ path('app_classedecours_consulter', {'id' : classeDeCours.id }) }}">
 			{{ classeDeCours.titre }}
 		</a>
 

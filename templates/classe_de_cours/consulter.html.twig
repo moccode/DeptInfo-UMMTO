@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Consulter la classe de cours" ~ classeDeCours.id %}
+
+{% block body %}
+
+	<h3>
+		{{ classeDeCours.titre }}
+		-
+		<a href="{{ path('app_classedecours_editer', {'id' : classeDeCours.id }) }}">
+			Editer
+		</a>
+	</h3>
+	<p>{{ classeDeCours.promotion.titre }}</p>
+	<p>{{ classeDeCours.description }}</p>
+	<br><br>
+
+
+	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
+
+{% endblock %}

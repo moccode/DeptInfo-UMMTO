@@ -46,6 +46,15 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
+     * @Route("/classes/{id<[0-9]+>}", name="app_classedecours_consulter")
+     */
+    public function consulter(ClasseDeCours $classeDeCours): Response
+    {
+        return $this->render('classe_de_cours/consulter.html.twig', compact("classeDeCours"));
+    }
+
+
+    /**
      * @Route("/classes/{id<[0-9]+>}/editer", name="app_classedecours_editer")
      */
     public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
