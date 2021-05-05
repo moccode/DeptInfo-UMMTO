@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\Timestampable;
 use App\Repository\ClasseDeCoursRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClasseDeCoursRepository::class)
@@ -24,6 +25,15 @@ class ClasseDeCours
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Ce champ ne doit pas être vide !"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 255,
+     *      minMessage = "Le taille de champ ne doit pas être inférieure à {{ limit }} caractères !",
+     *      maxMessage = "Le taille de champ ne doit pas dépasser {{ limit }} caractères !"
+     * )
      */
     private $titre;
 
