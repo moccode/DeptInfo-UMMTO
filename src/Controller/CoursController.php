@@ -48,4 +48,30 @@ class CoursController extends AbstractController
         $cours = $coursRepository->findOneBy(['id' => $id_cours]);
         return $this->render('cours/consulter.html.twig', compact("cours"));
     }
+
+    /**
+     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/editer", name="app_cours_editer")
+     */
+    public function editer(int $id_cours, CoursRepository $coursRepository, Request $request, EntityManagerInterface $em, int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
+    {
+        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
+
+        $form = $this->createForm(CoursType::class, $cours);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $classedecours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
+            $cours->setClasseDeCours($classedecours);
+            $em->persist($cours);
+            $em->flush();
+
+            return $this->redirectToRoute("app_classedecours_index");
+        }
+
+        return $this->render('cours/editer.html.twig', [
+            "cours" => $cours,
+            "formCours" => $form->createView()
+        ]);
+    }
 }

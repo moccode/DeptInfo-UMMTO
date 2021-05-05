@@ -7,11 +7,14 @@
 	<h3>
 		{{ cours.titre }}
 		-
-		<a href="{{ path('app_cours_editer', {'id' : cours.id }) }}">
+		<a href="{{ path('app_cours_editer', {'id_cours' : cours.id, 'id_classedecours' : cours.classeDeCours.id}) }}">
 			Editer
 		</a>
 	</h3>
-	<p>{{ classeDeCours.description }}</p>
+
+	<p>
+		{{ cours.description }}
+	</p>
 	<br><br>
 
 
