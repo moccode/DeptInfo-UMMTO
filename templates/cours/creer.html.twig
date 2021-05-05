@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CoursController!
-{% endblock %}
+{% block title "Créer un cours" %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<h3>
+		Créer un nouveau support de cours
+	</h3>
+
+	{{ include("cours/_form.html.twig") }}
+
+	<a href="{{ path('app_classedecours_index') }}">Annuler</a>
+
+{% endblock %}
