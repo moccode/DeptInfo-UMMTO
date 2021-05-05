@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\ClasseDeCoursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -51,6 +53,16 @@ class ClasseDeCours
      */
     private $promotion;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Cours::class, mappedBy="classeDeCours", orphanRemoval=true)
+     */
+    private $cours;
+
+    public function __construct()
+    {
+        $this->cours = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -89,6 +101,36 @@ class ClasseDeCours
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->setClasseDeCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            // set the owning side to null (unless already changed)
+            if ($cour->getClasseDeCours() === $this) {
+                $cour->setClasseDeCours(null);
+            }
+        }
 
         return $this;
     }
