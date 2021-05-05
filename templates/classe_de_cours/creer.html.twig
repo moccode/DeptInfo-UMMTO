@@ -6,11 +6,7 @@
 	<h3>
 		Créer une nouvelle classe de cours
 	</h3>
-
-	{{ form_start(formClasseDeCours) }}
-	{{ form_row(formClasseDeCours) }}
-	<input type="submit" value="Créer" formnovalidate>
-	{{ form_end(formClasseDeCours) }}
+	{{ include("classe_de_cours/_form.html.twig") }}
 
 
 {% endblock %}
