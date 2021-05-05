@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title cours.titre %}
+{% block title cours.titre|default('Titre du cours') %}
+
 
 {% block body %}
 

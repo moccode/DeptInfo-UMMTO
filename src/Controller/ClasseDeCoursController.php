@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+
 
 class ClasseDeCoursController extends AbstractController
 {
@@ -47,21 +49,22 @@ class ClasseDeCoursController extends AbstractController
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter", methods={"GET"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * 
      */
-    public function consulter(int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
+    public function consulter(ClasseDeCours $classeDeCours): Response
     {
-        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
         return $this->render('classe_de_cours/consulter.html.twig', compact("classeDeCours"));
     }
 
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer", methods={"GET","PUT"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * 
      */
-    public function editer(int $id_classedecours, Request $request, EntityManagerInterface $em, ClasseDeCoursRepository $classeDeCoursRepository): Response
+    public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
     {
-        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
-
         $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours, [
             'method' => 'PUT'
         ]);
@@ -83,14 +86,12 @@ class ClasseDeCoursController extends AbstractController
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/supprimer", name="app_classedecours_supprimer", methods={"DELETE"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      */
-    public function supprimer(int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository, EntityManagerInterface $em): Response
+    public function supprimer(ClasseDeCours $classeDeCours, EntityManagerInterface $em): Response
     {
-        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
-
         $em->remove($classeDeCours);
         $em->flush();
-
         return $this->redirectToRoute('app_classedecours_index');
     }
 }

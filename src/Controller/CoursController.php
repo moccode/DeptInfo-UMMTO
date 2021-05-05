@@ -2,24 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\ClasseDeCours;
 use App\Entity\Cours;
 use App\Form\CoursType;
-use App\Repository\ClasseDeCoursRepository;
-use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class CoursController extends AbstractController
 {
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/creer", name="app_cours_creer", methods={"GET","POST"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      */
-    public function creer(Request $request, EntityManagerInterface $em, int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
+    public function creer(Request $request, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
-
         $cours = new Cours();
 
         $form = $this->createForm(CoursType::class, $cours);
@@ -27,39 +27,39 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $classedecours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
-            $cours->setClasseDeCours($classedecours);
+
+            $cours->setClasseDeCours($classeDeCours);
             $em->persist($cours);
             $em->flush();
 
             return $this->redirectToRoute("app_cours_consulter", [
-                'id_classedecours' => $id_classedecours,
+                'id_classedecours' => $classeDeCours->getId(),
                 'id_cours' => $cours->getId()
             ]);
         }
 
         return $this->render('cours/creer.html.twig', [
-            "id_classedecours" => $id_classedecours,
+            "id_classedecours" => $classeDeCours->getId(),
             "formCours" => $form->createView()
         ]);
     }
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}", name="app_cours_consulter", methods={"GET"})
+     * @Entity("cours", expr="repository.find(id_cours)")
      */
-    public function consulter(int $id_cours, CoursRepository $coursRepository): Response
+    public function consulter(Cours $cours): Response
     {
-        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
         return $this->render('cours/consulter.html.twig', compact("cours"));
     }
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/editer", name="app_cours_editer", methods={"GET","PUT"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * @Entity("cours", expr="repository.find(id_cours)")
      */
-    public function editer(int $id_cours, CoursRepository $coursRepository, Request $request, EntityManagerInterface $em, int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
+    public function editer(Cours $cours, Request $request, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
-        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
-
         $form = $this->createForm(CoursType::class, $cours, [
             'method' => 'PUT'
         ]);
@@ -67,12 +67,14 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $classedecours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
-            $cours->setClasseDeCours($classedecours);
+            $cours->setClasseDeCours($classeDeCours);
             $em->persist($cours);
             $em->flush();
 
-            return $this->redirectToRoute("app_classedecours_index");
+            return $this->redirectToRoute("app_cours_consulter", [
+                'id_classedecours' => $classeDeCours->getId(),
+                'id_cours' => $cours->getId()
+            ]);
         }
 
         return $this->render('cours/editer.html.twig', [
@@ -83,16 +85,17 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/supprimer", name="app_cours_supprimer", methods={"DELETE"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * @Entity("cours", expr="repository.find(id_cours)")
      */
-    public function supprimer(int $id_cours, CoursRepository $coursRepository, EntityManagerInterface $em, int $id_classedecours): Response
+    public function supprimer(Cours $cours, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
-        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
 
         $em->remove($cours);
         $em->flush();
 
         return $this->redirectToRoute("app_classedecours_consulter", [
-            'id_classedecours' => $id_classedecours
+            'id_classedecours' => $classeDeCours->getId()
         ]);
     }
 }
