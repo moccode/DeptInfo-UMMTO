@@ -24,4 +24,12 @@
 
 	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
 
+	<h4>Liste des cours publiés dans cette classe de cours</h4>
+
+	{% for cour in classeDeCours.cours %}
+		{{ cour.titre }}
+		<br>
+	{% endfor %}
+
+
 {% endblock %}
