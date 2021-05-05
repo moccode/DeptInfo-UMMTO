@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClasseDeCoursController extends AbstractController
 {
     /**
-     * @Route("/classes", name="app_classedecours_index")
+     * @Route("/classes", name="app_classedecours_index", methods={"GET"})
      */
     public function index(ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
@@ -24,7 +24,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/creer", name="app_classedecours_creer")
+     * @Route("/classes/creer", name="app_classedecours_creer", methods={"GET","POST"})
      */
     public function creer(Request $request, EntityManagerInterface $em): Response
     {
@@ -46,7 +46,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter")
+     * @Route("/classes/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter", methods={"GET"})
      */
     public function consulter(int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
@@ -56,13 +56,15 @@ class ClasseDeCoursController extends AbstractController
 
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer")
+     * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer", methods={"GET","PUT"})
      */
     public function editer(int $id_classedecours, Request $request, EntityManagerInterface $em, ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
         $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
 
-        $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
+        $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours, [
+            'method' => 'PUT'
+        ]);
 
         $form->handleRequest($request);
 
