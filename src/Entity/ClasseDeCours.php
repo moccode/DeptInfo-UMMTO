@@ -45,6 +45,13 @@ class ClasseDeCours
     /**
      * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="classeDeCours")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(
+     *      message="Ce champ ne doit pas être vide !"
+     * )
+     * @Assert\Choice(
+     *      callback={"App\Entity\Promotion", "getPromotion"},
+     *      message = "Cette n'existe pas parmi les promotions disponibles !"
+     * )
      */
     private $promotion;
 

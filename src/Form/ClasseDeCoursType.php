@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\ClasseDeCours;
+use App\Entity\Promotion;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,6 +27,10 @@ class ClasseDeCoursType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Donner une description à votre classe de cours'
                 ]
+            ])
+            ->add('promotion', EntityType::class, [
+                'class' => Promotion::class,
+                'choice_label' => 'titre',
             ]);
     }
 
