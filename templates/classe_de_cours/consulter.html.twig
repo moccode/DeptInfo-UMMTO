@@ -27,7 +27,9 @@
 	<h4>Liste des cours publiés dans cette classe de cours</h4>
 
 	{% for cour in classeDeCours.cours %}
-		{{ cour.titre }}
+		<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
+
+
 		<br>
 	{% endfor %}
 

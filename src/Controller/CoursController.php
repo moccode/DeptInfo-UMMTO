@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cours;
 use App\Form\CoursType;
 use App\Repository\ClasseDeCoursRepository;
+use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,5 +38,14 @@ class CoursController extends AbstractController
         return $this->render('cours/creer.html.twig', [
             "formCours" => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}", name="app_cours_consulter")
+     */
+    public function consulter(int $id_cours, CoursRepository $coursRepository): Response
+    {
+        $cours = $coursRepository->findOneBy(['id' => $id_cours]);
+        return $this->render('cours/consulter.html.twig', compact("cours"));
     }
 }
