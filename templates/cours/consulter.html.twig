@@ -13,9 +13,8 @@
 		</a>
 	</h3>
 	<p>
-		{{ cours.dateCreation|DateInterval('%d days') }}
-
-
+		Publié,
+		{{ cours.dateCreation|ago(locale='fr') }}
 	</p>
 	<p>
 		{{ cours.description }}
