@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ClasseDeCours;
 use App\Form\ClasseDeCoursType;
+use App\Repository\ClasseDeCoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,11 @@ class ClasseDeCoursController extends AbstractController
     /**
      * @Route("/classes", name="app_classedecours_index")
      */
-    public function index(): Response
+    public function index(ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
-        return $this->render('classe_de_cours/index.html.twig');
+        $classesDeCours = $classeDeCoursRepository->findAll();
+
+        return $this->render('classe_de_cours/index.html.twig', compact("classesDeCours"));
     }
 
     /**
@@ -43,7 +46,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/editer/{id<[0-9]+>}", name="app_classedecours_editer")
+     * @Route("/classes/{id<[0-9]+>}/editer", name="app_classedecours_editer")
      */
     public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
     {
