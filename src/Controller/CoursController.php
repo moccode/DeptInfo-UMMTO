@@ -82,7 +82,7 @@ class CoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/delete", name="app_cours_supprimer", methods={"DELETE"})
+     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/supprimer", name="app_cours_supprimer", methods={"DELETE"})
      */
     public function supprimer(int $id_cours, CoursRepository $coursRepository, EntityManagerInterface $em, int $id_classedecours): Response
     {

@@ -10,23 +10,27 @@
 		<a href="{{ path('app_classedecours_editer', {'id_classedecours' : classeDeCours.id }) }}">
 			Editer
 		</a>
+		-
+		<a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cette classe de cours ?') && document.getElementById('js-classedecours-form-delete').submit();">Supprimer</a>
 	</h3>
+
 	<p>{{ classeDeCours.promotion.titre }}</p>
 	<p>{{ classeDeCours.description }}</p>
 	<p>
 		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
 			Publier un nouveau cours
 		</a>
-
 	</p>
-	<br><br>
-
+	<form action="{{ path('app_classedecours_supprimer', {'id_classedecours' : classeDeCours.id}) }}" method="POST" id="js-classedecours-form-delete" style="display: none;">
+		<input type="hidden" name="_method" value="DELETE">
+	</form>
+	<br>
 
 	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
 
-	<h4>Liste des cours publiés dans cette classe de cours - 
-				({{ classeDeCours.cours|length }}
-		cours)
+	<h4>Liste des cours publiés dans cette classe de cours - (
+		{{ classeDeCours.cours|length }}
+		cours )
 	</h4>
 
 

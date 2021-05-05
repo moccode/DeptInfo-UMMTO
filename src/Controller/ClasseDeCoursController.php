@@ -80,4 +80,17 @@ class ClasseDeCoursController extends AbstractController
             "formClasseDeCours" => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/classes/{id_classedecours<[0-9]+>}/supprimer", name="app_classedecours_supprimer", methods={"DELETE"})
+     */
+    public function supprimer(int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository, EntityManagerInterface $em): Response
+    {
+        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
+
+        $em->remove($classeDeCours);
+        $em->flush();
+
+        return $this->redirectToRoute('app_classedecours_index');
+    }
 }
