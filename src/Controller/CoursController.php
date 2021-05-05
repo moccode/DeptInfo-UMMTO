@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cours;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoursController extends AbstractController
 {
     /**
-     * @Route("/cours", name="cours")
+     * @Route("/classes/{id<[0-9]+>}/cours/creer", name="app_cours_creer")
      */
-    public function index(): Response
+    public function creer(): Response
     {
-        return $this->render('cours/index.html.twig', [
-            'controller_name' => 'CoursController',
-        ]);
+        $cours = new Cours();
+
+        return $this->render('cours/creer.html.twig');
     }
 }
