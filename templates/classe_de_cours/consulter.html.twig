@@ -24,11 +24,22 @@
 
 	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
 
-	<h4>Liste des cours publiés dans cette classe de cours</h4>
+	<h4>Liste des cours publiés dans cette classe de cours - 
+		({{ classeDeCours.cours|length }} cours)
+		</h4>
 
-	{% for cour in classeDeCours.cours %}
-		<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
-		<br>
-	{% endfor %}
+
+	{% if (classeDeCours.cours|length) == 0 %}
+		Aucun cours publié dans cette classe pour le moment.
+		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
+			créez-en un !
+		</a>
+
+	{% else %}
+		{% for cour in classeDeCours.cours %}
+			<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
+			<br>
+		{% endfor %}
+	{% endif %}
 
 {% endblock %}
