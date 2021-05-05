@@ -7,7 +7,7 @@
 	<h3>
 		{{ classeDeCours.titre }}
 		-
-		<a href="{{ path('app_classedecours_editer', {'id' : classeDeCours.id }) }}">
+		<a href="{{ path('app_classedecours_editer', {'id_classedecours' : classeDeCours.id }) }}">
 			Editer
 		</a>
 	</h3>
@@ -28,10 +28,7 @@
 
 	{% for cour in classeDeCours.cours %}
 		<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
-
-
 		<br>
 	{% endfor %}
-
 
 {% endblock %}

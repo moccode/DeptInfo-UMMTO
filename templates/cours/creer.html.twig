@@ -9,6 +9,7 @@
 
 	{{ include("cours/_form.html.twig") }}
 
-	<a href="{{ path('app_classedecours_index') }}">Annuler</a>
+	<a href="{{ path('app_classedecours_consulter', {'id_classedecours' : id_classedecours}) }}">Revenir à ma classe</a>
+
 
 {% endblock %}

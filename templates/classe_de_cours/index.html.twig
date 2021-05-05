@@ -11,14 +11,14 @@
 
 	{% for classeDeCours in classesDeCours %}
 
-		<a href="{{ path('app_classedecours_consulter', {'id' : classeDeCours.id }) }}">
+		<a href="{{ path('app_classedecours_consulter', {'id_classedecours' : classeDeCours.id }) }}">
 			{{ classeDeCours.titre }}
 		</a>
 
 		<br>
 
 	{% endfor %}
-	
+
 	<br><br>
 	<a href="{{ path('app_home') }}">Revenir à l'accueil du site</a>
 

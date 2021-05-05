@@ -36,6 +36,7 @@ class CoursController extends AbstractController
         }
 
         return $this->render('cours/creer.html.twig', [
+            "id_classedecours" => $id_classedecours,
             "formCours" => $form->createView()
         ]);
     }

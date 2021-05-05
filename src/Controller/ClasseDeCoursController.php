@@ -46,19 +46,22 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id<[0-9]+>}", name="app_classedecours_consulter")
+     * @Route("/classes/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter")
      */
-    public function consulter(ClasseDeCours $classeDeCours): Response
+    public function consulter(int $id_classedecours, ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
+        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
         return $this->render('classe_de_cours/consulter.html.twig', compact("classeDeCours"));
     }
 
 
     /**
-     * @Route("/classes/{id<[0-9]+>}/editer", name="app_classedecours_editer")
+     * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer")
      */
-    public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
+    public function editer(int $id_classedecours, Request $request, EntityManagerInterface $em, ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
+        $classeDeCours = $classeDeCoursRepository->findOneBy(['id' => $id_classedecours]);
+
         $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
 
         $form->handleRequest($request);
