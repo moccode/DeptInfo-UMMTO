@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Modifier la classe de cours" ~ classeDeCours.titre %}
+
+
+{% block body %}
+	<h3>
+		Modifier la classe de cours
+		{{ classeDeCours.titre }}
+
+	</h3>
+
+	{{ form_start(formClasseDeCours) }}
+	{{ form_row(formClasseDeCours) }}
+	<input type="submit" value="Modifier" formnovalidate>
+	{{ form_end(formClasseDeCours) }}
+
+
+{% endblock %}

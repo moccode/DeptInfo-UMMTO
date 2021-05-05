@@ -41,4 +41,26 @@ class ClasseDeCoursController extends AbstractController
             "formClasseDeCours" => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/classes/editer/{id<[0-9]+>}", name="app_classedecours_editer")
+     */
+    public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($classeDeCours);
+            $em->flush();
+
+            return $this->redirectToRoute("app_classedecours_index");
+        }
+
+        return $this->render('classe_de_cours/editer.html.twig', [
+            "classeDeCours" => $classeDeCours,
+            "formClasseDeCours" => $form->createView()
+        ]);
+    }
 }
