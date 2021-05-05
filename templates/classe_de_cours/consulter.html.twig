@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Consulter la classe de cours" ~ classeDeCours.id %}
+{% block title classeDeCours.titre %}
 
 {% block body %}
 
@@ -25,8 +25,9 @@
 	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
 
 	<h4>Liste des cours publiés dans cette classe de cours - 
-		({{ classeDeCours.cours|length }} cours)
-		</h4>
+				({{ classeDeCours.cours|length }}
+		cours)
+	</h4>
 
 
 	{% if (classeDeCours.cours|length) == 0 %}
