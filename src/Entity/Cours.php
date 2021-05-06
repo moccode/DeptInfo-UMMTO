@@ -6,10 +6,13 @@ use App\Entity\Traits\Timestampable;
 use App\Repository\CoursRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=CoursRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Cours
 {
@@ -46,6 +49,20 @@ class Cours
      * @ORM\JoinColumn(nullable=false)
      */
     private $classeDeCours;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nomFichierCours;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="cours_file", fileNameProperty="nomFichierCours")
+     * 
+     * @var File|null
+     */
+    private $fichierCours;
 
 
     public function getId(): ?int
@@ -87,5 +104,36 @@ class Cours
         $this->classeDeCours = $classeDeCours;
 
         return $this;
+    }
+
+    public function getNomFichierCours(): ?string
+    {
+        return $this->nomFichierCours;
+    }
+
+    public function setNomFichierCours(?string $nomFichierCours): self
+    {
+        $this->nomFichierCours = $nomFichierCours;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $fichierCours
+     */
+    public function setFichierCours(?File $fichierCours = null): void
+    {
+        $this->fichierCours = $fichierCours;
+
+        if (null !== $fichierCours) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setDateModification(new \DateTimeImmutable);
+        }
+    }
+
+    public function getFichierCours(): ?File
+    {
+        return $this->fichierCours;
     }
 }
