@@ -16,7 +16,7 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('fichierCours', VichFileType::class, [
-                'label' => 'Fichier(PDF, DOC et DOCX)',
+                'label' => 'Fichier (PDF, DOC et DOCX)',
                 'required' => false,
                 'allow_delete' => false,
                 'download_uri' => false

@@ -60,6 +60,22 @@ class Cours
      * 
      * @Vich\UploadableField(mapping="cours_file", fileNameProperty="nomFichierCours")
      * 
+     * @Assert\File(
+     *     maxSize = "10M",
+     *     maxSizeMessage = "Le fichier ne doit pas dépasser 10MO !",
+     *     uploadIniSizeErrorMessage = "Le fichier ne doit pas dépasser 10MO !",
+     *     mimeTypes = {
+     *          "application/pdf", 
+     *          "application/x-pdf", 
+     *          "application/msword", 
+     *          "application/vnd.ms-excel", 
+     *          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+     *          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+     *          "application/vnd.openxmlformats-officedocument.presentationml.presentation", 
+     *          "text/plain"
+     *      },
+     *     mimeTypesMessage = "Veuillez sélectionner un fichier valide !"
+     * )
      * @var File|null
      */
     private $fichierCours;
