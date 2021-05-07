@@ -8,15 +8,24 @@
 		</title>
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 		{% endblock %}
 	</head>
 
 	<body>
-		{% block body %}{% endblock %}
-		{% block javascripts %}
-			<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-		{% endblock %}
-	</body>
+		{% include('layouts/partials/_nav.html.twig') %}
+
+		<main role="main" class="container"> {% block body %}{% endblock %}
+			</main>
+
+			{% include('layouts/partials/_footer.html.twig') %}
 
 
-</html>
+			{% block javascripts %}
+				<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+			{% endblock %}
+		</body>
+
+
+	</html>
