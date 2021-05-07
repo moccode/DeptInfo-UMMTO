@@ -28,13 +28,13 @@ class ClasseDeCours
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *      message="Ce champ ne doit pas être vide !"
+     *      message="Ce champ est requis."
      * )
      * @Assert\Length(
      *      min = 4,
      *      max = 255,
-     *      minMessage = "Le taille de champ ne doit pas être inférieure à {{ limit }} caractères !",
-     *      maxMessage = "Le taille de champ ne doit pas dépasser {{ limit }} caractères !"
+     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
      * )
      */
     private $titre;
@@ -48,7 +48,7 @@ class ClasseDeCours
      * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="classeDeCours")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(
-     *      message="Ce champ ne doit pas être vide !"
+     *      message="Ce champ est requis."
      * )
      */
     private $promotion;
@@ -74,7 +74,7 @@ class ClasseDeCours
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(?string $titre): self
     {
         $this->titre = $titre;
 

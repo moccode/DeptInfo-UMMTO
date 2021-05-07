@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -25,16 +26,51 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Ce champ est requis."
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
+     * )
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+",
+     *     message = "Ce champ ne peut contenir que des lettres."
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Ce champ est requis."
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
+     * )
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+",
+     *     message = "Ce champ ne peut contenir que des lettres."
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(
+     *      message="Ce champ est requis."
+     * )
+     * @Assert\Email(
+     *     message = "L'adresse email '{{ value }}' n'est pas valide."
+     * )
+     * 
      */
     private $email;
 
