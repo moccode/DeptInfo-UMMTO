@@ -1,2 +1,11 @@
+@font-face {
+ font-family: "Montserrat";
+ src: url("fonts/Montserrat/Montserrat-Bold.ttf") format("truetype")
+}
+
+html, body {
+    font-family: 'Montserrat', sans-serif;
+}
 .dropdown-toggle::after {
+    display: none;
 }
