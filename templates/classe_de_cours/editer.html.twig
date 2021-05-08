@@ -4,15 +4,14 @@
 
 
 {% block body %}
-	<h3>
+	<h3 class="mb-3 fw-normal text-center">
 		Modifier la classe de cours
 		{{ classeDeCours.titre }}
-
 	</h3>
 
-	{{ include("classe_de_cours/_form.html.twig", {"submitButtonText" : "Modifier"}) }}
-
-	<a href="{{ path('app_classedecours_index') }}">Annuler</a>
-
-
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			{{ include("classe_de_cours/_form.html.twig", {"submitButtonText" : "Modifier"}) }}
+		</div>
+	</div>
 {% endblock %}
