@@ -24,6 +24,25 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
+	{% else %}
+		<h3 class="mb-3 fw-normal">Classe de cours disponibles dans votre promotion
+			{{ app.user.promotion.titre}}
+		</h3>
+
+		{% if (app.user.promotion.classeDeCours|length) == 0 %}
+			<p>Aucune classe de cours disponible dans votre promotion pour le moment.</p>
+		{% else %}
+			<ul>
+				{% for classe in app.user.promotion.classeDeCours %}
+					<li>
+						<a href="">{{ classe.titre }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+
+		{% endif %}
+
+
 	{% endif %}
 
 
