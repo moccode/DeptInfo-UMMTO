@@ -9,15 +9,9 @@
 	{% endfor %}
 
 	<div class="row">
-		<div class="col-md-6 mx-auto">
-
-			<div class="card">
-				{{ include("registration/_nav.html.twig") }}
-				<div class="card-body">
-					<h5 class="text-center mb-3">Créer un compte étudiant</h5>
-					{{ include("registration/_form.html.twig", {'etudiant' : etudiant}) }}
-				</div>
-			</div>
+		<div class="col-lg-6 mx-auto">
+			<h3 class="mb-3 fw-normal text-center">Créer un compte étudiant</h3>
+			{{ include("registration/_form.html.twig", {'etudiant' : etudiant}) }}
 		</div>
 	</div>
 {% endblock %}

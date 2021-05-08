@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Vous êtes ?</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body w-100">
+				<div class="d-grid gap-1 mx-auto">
+					<a class="btn btn-outline-primary" href="{{ path('app_registration_etudiant') }}">Étudiant</a>
+					<a class="btn btn-outline-primary" href="{{ path('app_registration_enseignant') }}">Enseignant</a>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+			</div>
+		</div>
+	</div>
+</div>
