@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class ClasseDeCoursController extends AbstractController
@@ -27,6 +28,7 @@ class ClasseDeCoursController extends AbstractController
 
     /**
      * @Route("/classes/creer", name="app_classedecours_creer", methods={"GET","POST"})
+     * @isGranted("ROLE_ENSEIGNANT")
      */
     public function creer(Request $request, EntityManagerInterface $em): Response
     {
