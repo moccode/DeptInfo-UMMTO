@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ClasseDeCours;
+use App\Entity\Enseignant;
 use App\Form\ClasseDeCoursType;
 use App\Repository\ClasseDeCoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,9 +36,13 @@ class ClasseDeCoursController extends AbstractController
         $classeDeCours = new ClasseDeCours();
         $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
 
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $classeDeCours->setEnseignant($this->getUser());
+
             $em->persist($classeDeCours);
             $em->flush();
 

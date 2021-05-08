@@ -58,6 +58,12 @@ class ClasseDeCours
      */
     private $cours;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Enseignant::class, inversedBy="classesDeCours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enseignant;
+
     public function __construct()
     {
         $this->cours = new ArrayCollection();
@@ -131,6 +137,18 @@ class ClasseDeCours
                 $cour->setClasseDeCours(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEnseignant(): ?Enseignant
+    {
+        return $this->enseignant;
+    }
+
+    public function setEnseignant(?Enseignant $enseignant): self
+    {
+        $this->enseignant = $enseignant;
 
         return $this;
     }
