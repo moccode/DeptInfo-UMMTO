@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('registration/inscriptionEnseignant.html.twig', [
+        return $this->render('registration/enseignant.html.twig', [
             'formInscription' => $form->createView()
         ]);
     }
@@ -72,7 +72,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('registration/inscriptionEtudiant.html.twig', [
+        return $this->render('registration/etudiant.html.twig', [
             'formInscription' => $form->createView(),
             'etudiant' => true
         ]);

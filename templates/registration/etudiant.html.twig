@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Inscription | Enseignants" %}
+{% block title "Inscription | Étudiants " %}
+
 
 {% block body %}
 	{% for flashError in app.flashes('verify_email_error') %}
@@ -9,15 +10,14 @@
 
 	<div class="row">
 		<div class="col-md-6 mx-auto">
+
 			<div class="card">
 				{{ include("registration/_nav.html.twig") }}
-
 				<div class="card-body">
-					<h5 class="text-center mb-3">Inscription à la plateforme pour les enseignants</h5>
-					{{ include("registration/_form.html.twig") }}
+					<h5 class="text-center mb-3">Créer un compte étudiant</h5>
+					{{ include("registration/_form.html.twig", {'etudiant' : etudiant}) }}
 				</div>
 			</div>
 		</div>
 	</div>
-
 {% endblock %}
