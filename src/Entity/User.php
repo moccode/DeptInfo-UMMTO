@@ -85,6 +85,8 @@ abstract class User implements UserInterface
      */
     private $roles = [];
 
+    private $fullName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,5 +190,12 @@ abstract class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getFullName(): ?string
+    {
+        $this->fullName = $this->getPrenom() . ' ' . strtoupper($this->getNom());
+
+        return $this->fullName;
     }
 }

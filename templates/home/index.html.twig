@@ -7,22 +7,19 @@
 	{% if is_granted('ROLE_ENSEIGNANT') %}
 		<h3 class="mb-3 fw-normal">Mes classes de cours</h3>
 		{% if (app.user.classesDeCours|length) == 0 %}
-			<p>
+			<p classe="my-auto">
 				Vous n'avez pour le moment aucune classe de cours.
 				<a href="{{ path('app_classedecours_creer') }}">
-					créez-en un !
+					Créez-en un !
 				</a>
 			</p>
 		{% else %}
-			<ul class="nav flex-column">
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				{% for classe in app.user.classesDeCours %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_classedecours_consulter', {'id_classedecours' : classe.id}) }}">
-							{{ classe.titre }}
-						</a>
-					</li>
+					{% include('home/_card.html.twig') %}
 				{% endfor %}
-			</ul>
+			</div>
+
 		{% endif %}
 	{% else %}
 		<h3 class="mb-3 fw-normal">Classe de cours disponibles dans votre promotion
@@ -32,18 +29,15 @@
 		{% if (app.user.promotion.classeDeCours|length) == 0 %}
 			<p>Aucune classe de cours disponible dans votre promotion pour le moment.</p>
 		{% else %}
-			<ul>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				{% for classe in app.user.promotion.classeDeCours %}
-					<li>
-						<a href="">{{ classe.titre }}</a>
-					</li>
+					{% include('home/_card.html.twig') %}
 				{% endfor %}
-			</ul>
+			</div>
+
 
 		{% endif %}
 
 
 	{% endif %}
-
-
 {% endblock %}
