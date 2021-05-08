@@ -1,11 +1,21 @@
 @font-face {
  font-family: "Montserrat";
- src: url("fonts/Montserrat/Montserrat-Bold.ttf") format("truetype")
+ src: url("fonts/Montserrat/Montserrat-Regular.ttf") format("truetype")
 }
 
 html, body {
     font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
 }
 .dropdown-toggle::after {
     display: none;
+}
+
+.link_register_form {
+border: none !important;
+}  
+
+.link_register_form.active {  
+    background-color: #0d6efd !important;
+    color: #fff !important;
 }

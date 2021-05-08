@@ -18,4 +18,5 @@
 ###> custom env vars ###
 /public/uploads/
 /public/fonts/
+/public/img/
 ###< custom env vars  ###

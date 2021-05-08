@@ -7,9 +7,17 @@
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
 
-	<h3>Inscription à la plateforme pour les enseignants</h3>
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<div class="card">
+				{{ include("registration/_nav.html.twig") }}
 
-	{{ include("registration/_form.html.twig") }}
-
+				<div class="card-body">
+					<h5 class="text-center mb-3">Inscription à la plateforme pour les enseignants</h5>
+					{{ include("registration/_form.html.twig") }}
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

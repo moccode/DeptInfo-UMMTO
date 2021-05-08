@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
 {
 
     /**
-     * @Route("/enseignants/inscription", name="app_registration_inscriptionEnseignant")
+     * @Route("/enseignants/inscription", name="app_registration_enseignant")
      */
     public function inscriptionEnseignant(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em): Response
     {
@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/etudiants/inscription", name="app_registration_inscriptionEtudiant")
+     * @Route("/etudiants/inscription", name="app_registration_etudiant")
      */
     public function inscriptionEtudiant(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em): Response
     {
