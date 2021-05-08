@@ -33,7 +33,8 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
+            )
+            ->setRoles(['ROLE_ENSEIGNANT']);
 
             $em->persist($user);
             $em->flush();
@@ -63,7 +64,8 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
+            )
+            ->setRoles(['ROLE_ETUDIANT']);
 
             $em->persist($user);
             $em->flush();
