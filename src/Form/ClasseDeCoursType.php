@@ -17,20 +17,14 @@ class ClasseDeCoursType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'Titre *',
-                'attr' => [
-                    'placeholder' => 'Donner un titre à votre classe de cours'
-                ]
+                'label' => 'Titre'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
-                'attr' => [
-                    'placeholder' => 'Donner une description à votre classe de cours'
-                ]
+                'label' => 'Description (facultatif)'
             ])
             ->add('promotion', EntityType::class, [
                 'class' => Promotion::class,
-                'choice_label' => 'titre',
+                'choice_label' => 'titre'
             ]);
     }
 
