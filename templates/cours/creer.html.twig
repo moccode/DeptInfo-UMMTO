@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Créer un cours" %}
+{% block title "Nouveau cours" %}
 
 {% block body %}
-	<h3>
-		Créer un nouveau support de cours
-	</h3>
 
-	{{ include("cours/_form.html.twig") }}
+	<h3 class="mb-3 fw-normal text-center">Créer un nouveau support de cours</h3>
 
-	<a href="{{ path('app_classedecours_consulter', {'id_classedecours' : id_classedecours}) }}">Revenir à ma classe</a>
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			{{ include("cours/_form.html.twig") }}
+			<button class="btn btn-link mt-2" onclick="window.history.back();">Annuler</button>
+		</div>
+	</div>
 
 
 {% endblock %}

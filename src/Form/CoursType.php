@@ -16,22 +16,17 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('fichierCours', VichFileType::class, [
-                'label' => 'Fichier (PDF, DOC et DOCX)',
+                'label' => 'Fichier (PDF, Word, Excel et PowerPoint)',
                 'required' => false,
                 'allow_delete' => false,
                 'download_uri' => false
             ])
             ->add('titre', TextType::class, [
-                'label' => 'Titre *',
-                'attr' => [
-                    'placeholder' => 'Donner un titre à votre cours'
-                ]
+                'label' => 'Titre'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
-                'attr' => [
-                    'placeholder' => 'Donner une description à votre classe de cours'
-                ]
+                'label' => 'Description (facultatif)',
+                'required' => false
             ]);
     }
 

@@ -20,7 +20,8 @@ class ClasseDeCoursType extends AbstractType
                 'label' => 'Titre'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description (facultatif)'
+                'label' => 'Description (facultatif)',
+                'required' => false
             ])
             ->add('promotion', EntityType::class, [
                 'class' => Promotion::class,

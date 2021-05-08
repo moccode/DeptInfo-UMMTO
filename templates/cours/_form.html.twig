@@ -1,4 +1,10 @@
 {{ form_start(formCours) }}
-{{ form_row(formCours) }}
-<input type="submit" value="{{ submitButtonText|default('Créer') }}" formnovalidate>
+{{ form_row(formCours.fichierCours) }}
+{{ form_row(formCours.titre) }}
+{{ form_row(formCours.description) }}
+<div class="d-grid gap-2 mt-3">
+	<button class="btn btn-primary" type="submit">
+		{{ submitButtonText|default('Créer') }}
+	</button>
+</div>
 {{ form_end(formCours) }}
