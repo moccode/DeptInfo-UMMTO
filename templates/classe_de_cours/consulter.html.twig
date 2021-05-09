@@ -5,7 +5,7 @@
 {% block body %}
 
 	<div class="card bg-dark text-white border-none">
-		<img src="{{ asset('img/img_card.jpg') }}" class="card-img img-card-full w-100 h-100" alt="Image de la classe de cours" height="180">
+		<img src="{{ asset('img/img_card.jpg') }}" class="card-img img-card-full w-100 h-100" alt="Image de la classe de cours">
 		<div class="card-img-overlay">
 			<h3 class="card-title">{{ classeDeCours.titre }}</h3>
 			<p class="h5 card-text">{{ classeDeCours.promotion.titre }}</p>
@@ -53,27 +53,46 @@
 	</div>
 
 
-	<h3 class="my-2 fw-normal">Dernières publication
+	<h3 class="my-2 fw-normal">Dernières publications
 	</h3>
-	<div class="accordion" id="accordionCours">
-		{% for course in classeDeCours.cours %}
+
+	{% for course in classeDeCours.cours %}
+
+		<p class="small fst-normal">
+			<figcaption class="figure-caption">
+				Le
+				{{course.dateModification|date("d/m/Y à H:i:s")}}
+
+			</figcaption>
+		</p>
+
+		<div class="accordion" id="accordionCours">
 			<div class="accordion-item">
-				<h2 class="accordion-header" id="heading{{course.id}}">
-					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{course.id}}" aria-expanded="true" aria-controls="collapseOne">
+
+				<div class="accordion-header" id="heading{{course.id}}">
+
+					<button class="accordion-button fst-normal h5 mb-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{course.id}}" aria-expanded="false" aria-controls="collapse{{course.id}}">
+						{{course.enseignant.fullName}}
+						a publié un nouveau support de cours :
 						{{ course.titre }}
+						<br>
 					</button>
-				</h2>
-				<div id="collapse{{course.id}}" class="accordion-collapse collapse show" aria-labelledby="heading{{course.id}}" data-bs-parent="#accordionCours">
+
+				</div>
+
+				<div id="collapse{{course.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{course.id}}" data-bs-parent="#accordionCours">
 
 					<div class="accordion-body">
-						<strong>This is the first item's accordion body.</strong>
-						It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
-						<code>.accordion-body</code>, though the transition does limit overflow.
+						{{ course.description }}
 					</div>
+
+					<a class="btn btn-primary" href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : course.id } ) }}">Vois plus...</a>
+
+
 				</div>
 			</div>
-		{% endfor %}
-	</div>
+		</div>
+	{% endfor %}
 
 
 	{% if (classeDeCours.cours|length) == 0 %}
@@ -81,10 +100,6 @@
 		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
 			Créez-en un !
 		</a>
-	{% else %}
-		{% for cour in classeDeCours.cours %}
-			<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
-			<br>
-		{% endfor %}
+		{% else %}
 	{% endif %}
 {% endblock %}

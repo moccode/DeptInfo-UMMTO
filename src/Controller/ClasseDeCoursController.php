@@ -46,7 +46,9 @@ class ClasseDeCoursController extends AbstractController
             $em->persist($classeDeCours);
             $em->flush();
 
-            return $this->redirectToRoute("app_classedecours_index");
+            return $this->redirectToRoute("app_classedecours_consulter", [
+                'id_classedecours' => $classeDeCours->getId()
+            ]);
         }
 
         return $this->render('classe_de_cours/creer.html.twig', [
@@ -82,7 +84,9 @@ class ClasseDeCoursController extends AbstractController
             $em->persist($classeDeCours);
             $em->flush();
 
-            return $this->redirectToRoute("app_classedecours_index");
+            return $this->redirectToRoute("app_classedecours_consulter", [
+                'id_classedecours' => $classeDeCours->getId()
+            ]);
         }
 
         return $this->render('classe_de_cours/editer.html.twig', [

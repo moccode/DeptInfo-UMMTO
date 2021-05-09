@@ -20,20 +20,28 @@ border: none !important;
     color: #fff !important;
 }
 
+.card {
+    border: .0625rem solid #dadce0 !important;
+}
 .bg-light-card {
     background-color: rgb(134, 142, 150);
 }
+
 
 .img-card {
     max-height: 180px !important;
 }
 
 .img-card-full {
-    min-height: 180px !important;
+    min-height: 200px !important;
 }
 
 .dropdown-card {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.accordion-item {
+    border: .0625rem solid #dadce0;
 }
