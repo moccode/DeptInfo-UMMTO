@@ -6,6 +6,7 @@ use App\Entity\ClasseDeCours;
 use App\Entity\Cours;
 use App\Form\CoursType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use SplFileInfo;
 
 class CoursController extends AbstractController
 {
+
+    public function __construct(FlashyNotifier $flashy)
+    {
+        $this->flashy = $flashy;
+    }
+
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/creer", name="app_cours_creer", methods={"GET","POST"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
@@ -39,6 +46,8 @@ class CoursController extends AbstractController
             $em->persist($cours);
             $em->flush();
 
+            $this->flashy->success('Le cours a bien été crée !');
+
             return $this->redirectToRoute("app_cours_consulter", [
                 'id_classedecours' => $classeDeCours->getId(),
                 'id_cours' => $cours->getId()
@@ -60,8 +69,10 @@ class CoursController extends AbstractController
         /**
          * On récupère l'extension du fichier cours
          */
-        $fileInfo = pathinfo($cours->getNomFichierCours());
-        $extensionFichier = $fileInfo['extension'];
+
+        $info = new SplFileInfo($cours->getNomFichierCours());
+
+        $extensionFichier = $info->getExtension();
 
         return $this->render('cours/consulter.html.twig', [
             'cours' => $cours,
@@ -89,6 +100,8 @@ class CoursController extends AbstractController
             $em->persist($cours);
             $em->flush();
 
+            $this->flashy->success('Le cours a été mis à jour !');
+
             return $this->redirectToRoute("app_cours_consulter", [
                 'id_classedecours' => $classeDeCours->getId(),
                 'id_cours' => $cours->getId()
@@ -112,6 +125,8 @@ class CoursController extends AbstractController
 
         $em->remove($cours);
         $em->flush();
+
+        $this->flashy->success('Le cours a bien été supprimé !');
 
         return $this->redirectToRoute("app_classedecours_consulter", [
             'id_classedecours' => $classeDeCours->getId()

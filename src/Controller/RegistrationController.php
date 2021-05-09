@@ -8,6 +8,7 @@ use App\Entity\Etudiant;
 use App\Form\RegistrationEtudiantFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
+
+    public function __construct(FlashyNotifier $flashy)
+    {
+        $this->flashy = $flashy;
+    }
 
     /**
      * @Route("/enseignants/inscription", name="app_registration_enseignant")
@@ -34,10 +40,13 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-            ->setRoles(['ROLE_ENSEIGNANT']);
+                ->setRoles(['ROLE_ENSEIGNANT']);
 
             $em->persist($user);
             $em->flush();
+
+            $this->flashy->success('Votre compte a bien été crée !');
+
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_home');
@@ -65,10 +74,13 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-            ->setRoles(['ROLE_ETUDIANT']);
+                ->setRoles(['ROLE_ETUDIANT']);
 
             $em->persist($user);
             $em->flush();
+
+            $this->flashy->success('Votre compte a bien été crée !');
+
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_home');

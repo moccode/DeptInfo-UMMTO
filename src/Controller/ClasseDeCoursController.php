@@ -54,7 +54,7 @@ class ClasseDeCoursController extends AbstractController
             $em->persist($classeDeCours);
             $em->flush();
 
-            $this->flashy->success('Classe de cours créee !');
+            $this->flashy->success('La classe de cours a bien été créee !');
 
             return $this->redirectToRoute("app_classedecours_consulter", [
                 'id_classedecours' => $classeDeCours->getId()

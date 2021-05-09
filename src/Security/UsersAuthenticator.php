@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -31,12 +32,13 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     private $csrfTokenManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, FlashyNotifier $flashy)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->flashy = $flashy;
     }
 
     public function supports(Request $request)
@@ -71,7 +73,7 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email et/ou mot de passe incorrects !');
+            $this->flashy->error('Email et/ou mot de passe incorrects !');
         }
 
         return $user;
@@ -80,9 +82,8 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function checkCredentials($credentials, UserInterface $user)
     {
         if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
-            throw new CustomUserMessageAuthenticationException('Email et/ou mot de passe incorrects !');
+            $this->flashy->error('Email et/ou mot de passe incorrects !');
         }
-
         return true;
     }
 
@@ -99,7 +100,8 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        
+
+
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
