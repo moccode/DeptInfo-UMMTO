@@ -81,6 +81,12 @@ class Cours
      */
     private $fichierCours;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Enseignant::class, inversedBy="cours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enseignant;
+
 
     public function getId(): ?int
     {
@@ -152,5 +158,17 @@ class Cours
     public function getFichierCours(): ?File
     {
         return $this->fichierCours;
+    }
+
+    public function getEnseignant(): ?Enseignant
+    {
+        return $this->enseignant;
+    }
+
+    public function setEnseignant(?Enseignant $enseignant): self
+    {
+        $this->enseignant = $enseignant;
+
+        return $this;
     }
 }

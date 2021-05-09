@@ -13,12 +13,15 @@
 			<p class="small card-text">Dernière modification,
 				{{ classeDeCours.dateModification|ago(locale='fr') }}
 			</p>
-			<a class="btn btn-primary my-auto" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
-				Publier un nouveau cours
-			</a>
-			<form action="{{ path('app_classedecours_supprimer', {'id_classedecours' : classeDeCours.id}) }}" method="POST" id="js-classedecours-form-delete" style="display: none;">
-				<input type="hidden" name="_method" value="DELETE">
-			</form>
+
+			{# Boutton pour publier un cours #}
+			{% if is_granted('ROLE_ENSEIGNANT') %}
+				<a class="btn btn-primary my-auto" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
+					Publier un nouveau cours
+				</a>
+			{% endif %}
+			{# Boutton pour publier un cours #}
+
 
 			{# Dropdown tool card full #}
 			{% if is_granted('ROLE_ENSEIGNANT') %}
@@ -38,22 +41,39 @@
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">Nouveau cours</a>
-
 						</li>
-
+						<form action="{{ path('app_classedecours_supprimer', {'id_classedecours' : classeDeCours.id}) }}" method="POST" id="js-classedecours-form-delete" style="display: none;">
+							<input type="hidden" name="_method" value="DELETE">
+						</form>
 					</ul>
 				</div>
 			{% endif %}
 			{# Dropdown tool card full #}
-
 		</div>
 	</div>
 
 
-	<h4>Liste des cours publiés dans cette classe de cours - (
-		{{ classeDeCours.cours|length }}
-		cours )
-	</h4>
+	<h3 class="my-2 fw-normal">Dernières publication
+	</h3>
+	<div class="accordion" id="accordionCours">
+		{% for course in classeDeCours.cours %}
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="heading{{course.id}}">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{course.id}}" aria-expanded="true" aria-controls="collapseOne">
+						{{ course.titre }}
+					</button>
+				</h2>
+				<div id="collapse{{course.id}}" class="accordion-collapse collapse show" aria-labelledby="heading{{course.id}}" data-bs-parent="#accordionCours">
+
+					<div class="accordion-body">
+						<strong>This is the first item's accordion body.</strong>
+						It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
+						<code>.accordion-body</code>, though the transition does limit overflow.
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 
 
 	{% if (classeDeCours.cours|length) == 0 %}
@@ -61,7 +81,6 @@
 		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
 			créez-en un !
 		</a>
-
 	{% else %}
 		{% for cour in classeDeCours.cours %}
 			<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : cour.id } ) }}">{{ cour.titre }}</a>
