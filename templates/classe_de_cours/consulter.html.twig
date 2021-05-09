@@ -74,7 +74,7 @@
 					<button class="accordion-button fst-normal h5 mb-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{course.id}}" aria-expanded="false" aria-controls="collapse{{course.id}}">
 						{{course.enseignant.fullName}}
 						a publié un nouveau support de cours :
-						{{ course.titre }}
+						{{ course.titre|u.truncate(23, '...', true) }}
 						<br>
 					</button>
 
