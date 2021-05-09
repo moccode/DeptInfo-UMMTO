@@ -52,7 +52,16 @@ class CoursController extends AbstractController
      */
     public function consulter(Cours $cours): Response
     {
-        return $this->render('cours/consulter.html.twig', compact("cours"));
+        /**
+         * On récupère l'extension du fichier cours
+         */
+        $fileInfo = pathinfo($cours->getNomFichierCours());
+        $extensionFichier = $fileInfo['extension'];
+
+        return $this->render('cours/consulter.html.twig', [
+            'cours' => $cours,
+            'extensionFichier' => $extensionFichier
+        ]);
     }
 
     /**

@@ -53,8 +53,7 @@
 	</div>
 
 
-	<h3 class="my-2 fw-normal">Dernières publications
-	</h3>
+	<h3 class="my-2 fw-normal">Dernières publications</h3>
 
 	{% for course in classeDeCours.cours %}
 
@@ -66,32 +65,17 @@
 			</figcaption>
 		</p>
 
-		<div class="accordion" id="accordionCours">
-			<div class="accordion-item">
-
-				<div class="accordion-header" id="heading{{course.id}}">
-
-					<button class="accordion-button fst-normal h5 mb-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{course.id}}" aria-expanded="false" aria-controls="collapse{{course.id}}">
-						{{course.enseignant.fullName}}
-						a publié un nouveau support de cours :
-						{{ course.titre|u.truncate(23, '...', true) }}
-						<br>
-					</button>
-
-				</div>
-
-				<div id="collapse{{course.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{course.id}}" data-bs-parent="#accordionCours">
-
-					<div class="accordion-body">
-						{{ course.description }}
-					</div>
-
-					<a class="btn btn-primary" href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : course.id } ) }}">Vois plus...</a>
-
-
-				</div>
-			</div>
+		<div class="list-group">
+			<a href="{{ path('app_cours_consulter', { 'id_classedecours' : classeDeCours.id, 'id_cours' : course.id } ) }}" class="list-group-item list-group-item-action list-group-item-secondary">
+				{{course.enseignant.fullName}}
+				a publié un nouveau support de cours :
+				{{ course.titre|u.truncate(23, '...', true) }}
+				<svg class="float-end" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewbox="0 0 16 16">
+					<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+				</svg>
+			</a>
 		</div>
+
 	{% endfor %}
 
 
