@@ -4,29 +4,51 @@
 
 {% block body %}
 
-	<h3>
-		{{ classeDeCours.titre }}
-		-
-		<a href="{{ path('app_classedecours_editer', {'id_classedecours' : classeDeCours.id }) }}">
-			Editer
-		</a>
-		-
-		<a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cette classe de cours ?') && document.getElementById('js-classedecours-form-delete').submit();">Supprimer</a>
-	</h3>
+	<div class="card bg-dark text-white border-none">
+		<img src="{{ asset('img/img_card.jpg') }}" class="card-img img-card-full w-100 h-100" alt="Image de la classe de cours" height="180">
+		<div class="card-img-overlay">
+			<h3 class="card-title">{{ classeDeCours.titre }}</h3>
+			<p class="h5 card-text">{{ classeDeCours.promotion.titre }}</p>
+			<p class="card-text">{{ classeDeCours.description }}</p>
+			<p class="small card-text">Dernière modification,
+				{{ classeDeCours.dateModification|ago(locale='fr') }}
+			</p>
+			<a class="btn btn-primary my-auto" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
+				Publier un nouveau cours
+			</a>
+			<form action="{{ path('app_classedecours_supprimer', {'id_classedecours' : classeDeCours.id}) }}" method="POST" id="js-classedecours-form-delete" style="display: none;">
+				<input type="hidden" name="_method" value="DELETE">
+			</form>
 
-	<p>{{ classeDeCours.promotion.titre }}</p>
-	<p>{{ classeDeCours.description }}</p>
-	<p>
-		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
-			Publier un nouveau cours
-		</a>
-	</p>
-	<form action="{{ path('app_classedecours_supprimer', {'id_classedecours' : classeDeCours.id}) }}" method="POST" id="js-classedecours-form-delete" style="display: none;">
-		<input type="hidden" name="_method" value="DELETE">
-	</form>
-	<br>
+			{# Dropdown tool card full #}
+			{% if is_granted('ROLE_ENSEIGNANT') %}
+				<div class="dropdown dropdown-card">
+					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownCard" data-bs-toggle="dropdown" aria-expanded="false">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#f9f9f9" class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
+							<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+						</svg>
+					</a>
+					<ul class="dropdown-menu text-small" aria-labelledby="dropdownCard">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_classedecours_editer', {'id_classedecours' : classeDeCours.id }) }}">Editer</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cette classe de cours ?') && document.getElementById('js-classedecours-form-delete').submit();">Supprimer</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">Nouveau cours</a>
 
-	<a href="{{ path('app_classedecours_index') }}">Revenir à mes classes de cours</a>
+						</li>
+
+					</ul>
+				</div>
+			{% endif %}
+			{# Dropdown tool card full #}
+
+		</div>
+	</div>
+
 
 	<h4>Liste des cours publiés dans cette classe de cours - (
 		{{ classeDeCours.cours|length }}
@@ -46,5 +68,4 @@
 			<br>
 		{% endfor %}
 	{% endif %}
-
 {% endblock %}

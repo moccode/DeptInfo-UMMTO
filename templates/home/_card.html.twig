@@ -15,8 +15,8 @@
 				</figcaption>
 			</h6>
 			<p class="card-text">{{ classe.description|u.truncate(23, '...', true) }}</p>
-			<p class="small text-muted">Mise à jour le
-				{{ classe.dateModification|date('d/m/Y') }}</p>
+			<p class="small text-muted">Mise à jour,
+				{{ classe.dateModification|ago(locale='fr') }}</p>
 			<a class="btn btn-primary" href="{{ path('app_classedecours_consulter', {'id_classedecours' : classe.id}) }}">Voir plus...</a>
 
 		</div>
