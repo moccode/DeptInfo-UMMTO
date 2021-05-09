@@ -24,13 +24,14 @@
 	<a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer ce cours ?') && document.getElementById('js-cours-delete-form').submit();">
 		Supprimer
 	</a>
-	<br><br>
 
 	<form action="{{ path('app_cours_supprimer', {'id_cours' : cours.id, 'id_classedecours' : cours.classeDeCours.id}) }}" method="POST" id="js-cours-delete-form" style="display: none;">
 		<input type="hidden" name="_method" value="DELETE">
 	</form>
 
 	<a href="{{ path('app_classedecours_consulter', {'id_classedecours' : cours.classeDeCours.id}) }}">Revenir à ma classe</a>
+
+	<iframe src="https://127.0.0.1:8000/uploads/cours/{{ cours.nomFichierCours }}" width="100%" height="500"></iframe>
 
 
 {% endblock %}
