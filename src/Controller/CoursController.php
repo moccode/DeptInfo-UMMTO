@@ -11,12 +11,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 class CoursController extends AbstractController
 {
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/creer", name="app_cours_creer", methods={"GET","POST"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
+     * 
      */
     public function creer(Request $request, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
@@ -68,6 +73,8 @@ class CoursController extends AbstractController
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/editer", name="app_cours_editer", methods={"GET","PUT"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * @Entity("cours", expr="repository.find(id_cours)")
+     * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user and cours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
+     * 
      */
     public function editer(Cours $cours, Request $request, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
@@ -98,6 +105,7 @@ class CoursController extends AbstractController
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}/supprimer", name="app_cours_supprimer", methods={"DELETE"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * @Entity("cours", expr="repository.find(id_cours)")
+     * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user and cours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
      */
     public function supprimer(Cours $cours, EntityManagerInterface $em, ClasseDeCours $classeDeCours): Response
     {
