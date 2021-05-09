@@ -11,6 +11,7 @@
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
+			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 		{% endblock %}
 
@@ -27,5 +28,7 @@
 			</main>
 
 			{% include('layouts/partials/_footer.html.twig') %}
+			{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
 		</body>
 	</html>

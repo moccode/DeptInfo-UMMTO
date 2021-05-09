@@ -7,6 +7,7 @@ use App\Entity\Enseignant;
 use App\Form\ClasseDeCoursType;
 use App\Repository\ClasseDeCoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ClasseDeCoursController extends AbstractController
 {
+
+    public function __construct(FlashyNotifier $flashy)
+    {
+        $this->flashy = $flashy;
+    }
+
     /**
      * @Route("/classes", name="app_classedecours_index", methods={"GET"})
      */
@@ -32,7 +39,7 @@ class ClasseDeCoursController extends AbstractController
      * @Route("/classes/creer", name="app_classedecours_creer", methods={"GET","POST"})
      * @isGranted("ROLE_ENSEIGNANT", statusCode=401, message="Accès non autorisé")
      */
-    public function creer(Request $request, EntityManagerInterface $em): Response
+    public function creer(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
     {
         $classeDeCours = new ClasseDeCours();
         $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
@@ -46,6 +53,8 @@ class ClasseDeCoursController extends AbstractController
 
             $em->persist($classeDeCours);
             $em->flush();
+
+            $this->flashy->success('Classe de cours créee !');
 
             return $this->redirectToRoute("app_classedecours_consulter", [
                 'id_classedecours' => $classeDeCours->getId()
@@ -85,10 +94,14 @@ class ClasseDeCoursController extends AbstractController
             $em->persist($classeDeCours);
             $em->flush();
 
+
+            $this->flashy->success('Classe de cours mise à jour !');
+
             return $this->redirectToRoute("app_classedecours_consulter", [
                 'id_classedecours' => $classeDeCours->getId()
             ]);
         }
+
 
         return $this->render('classe_de_cours/editer.html.twig', [
             "classeDeCours" => $classeDeCours,
@@ -106,6 +119,9 @@ class ClasseDeCoursController extends AbstractController
     {
         $em->remove($classeDeCours);
         $em->flush();
-        return $this->redirectToRoute('app_classedecours_index');
+
+        $this->flashy->success('Classe de cours supprimée !');
+
+        return $this->redirectToRoute('app_home');
     }
 }
