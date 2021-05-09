@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class ClasseDeCoursController extends AbstractController
@@ -29,7 +30,7 @@ class ClasseDeCoursController extends AbstractController
 
     /**
      * @Route("/classes/creer", name="app_classedecours_creer", methods={"GET","POST"})
-     * @isGranted("ROLE_ENSEIGNANT")
+     * @isGranted("ROLE_ENSEIGNANT", statusCode=401, message="Accès non autorisé")
      */
     public function creer(Request $request, EntityManagerInterface $em): Response
     {
@@ -70,7 +71,7 @@ class ClasseDeCoursController extends AbstractController
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer", methods={"GET","PUT"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
-     * 
+     * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
      */
     public function editer(ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em): Response
     {
@@ -98,6 +99,8 @@ class ClasseDeCoursController extends AbstractController
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/supprimer", name="app_classedecours_supprimer", methods={"DELETE"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
+     * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
+     * 
      */
     public function supprimer(ClasseDeCours $classeDeCours, EntityManagerInterface $em): Response
     {
