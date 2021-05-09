@@ -79,7 +79,7 @@
 	{% if (classeDeCours.cours|length) == 0 %}
 		Aucun cours publié dans cette classe pour le moment.
 		<a href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
-			créez-en un !
+			Créez-en un !
 		</a>
 	{% else %}
 		{% for cour in classeDeCours.cours %}

@@ -28,7 +28,9 @@ class CoursController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $cours->setClasseDeCours($classeDeCours);
+            $cours->setClasseDeCours($classeDeCours)
+                ->setEnseignant($this->getUser());
+
             $em->persist($cours);
             $em->flush();
 
