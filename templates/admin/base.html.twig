@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html
+	lang="fr">
+
+	{# Head #}
+	{% include('layouts/partials/_header.html.twig') %}
+	{# end Head #}
+
+	{# Body #}
+		<body class="bg-light">{% block body %}{% endblock %} 
+        {% include('layouts/partials/_footer.html.twig') %}
+		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+        </body>
+	{# end Body #}
+</html>

@@ -1,25 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
 
-		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
+<html
+	lang="fr">
 
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-			<link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
-			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
-			<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-		{% endblock %}
+	{# Head #}
+	{% include('layouts/partials/_header.html.twig') %}
+	{# end Head #}
 
-	</head>
-
-	<body class="bg-light">
-
-		{% if app.request.get('_route') not in ['app_login', 'app_registration_etudiant', 'app_registration_enseignant'] %}
+	{# Body #}
+		<body class="bg-light"> {% if app.request.get('_route') not in ['app_login', 'app_registration_etudiant', 'app_registration_enseignant'] %}
 			{% include('layouts/partials/_nav.html.twig') %}
 		{% endif %}
 
@@ -31,4 +20,5 @@
 			{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 		</body>
+		{# end Body #}
 	</html>
