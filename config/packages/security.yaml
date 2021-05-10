@@ -12,7 +12,7 @@ security:
         #         property: email
         chain_provider:
             chain:
-                providers: [app_etudiant_provider, app_enseignant_provider]
+                providers: [app_etudiant_provider, app_enseignant_provider, app_admin_provider]
         app_etudiant_provider:
             entity:
                 class: App\Entity\Etudiant
@@ -20,6 +20,10 @@ security:
         app_enseignant_provider:
             entity:
                 class: App\Entity\Enseignant
+                property: email
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
                 property: email
     firewalls:
         dev:
@@ -35,7 +39,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: app_home
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -46,9 +50,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/etudiants/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/enseignants/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

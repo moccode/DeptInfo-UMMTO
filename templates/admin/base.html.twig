@@ -1,46 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		{% include('layouts/partials/_stylesheet.html.twig') %}
+		{% block stylesheets %}
+			{% include('layouts/partials/_stylesheet.html.twig') %}
+			<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+		{% endblock %}
 	</head>
 
 	<body class="bg-light">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
-			<div class="container-fluid">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
 
-				<div class="collapse navbar-collapse" id="navbarsExample05">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('admin_promotion_index') }}">Pomotions</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('admin_enseignant_index') }}">Enseignants</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('admin_etudiant_index') }}">Étudiants</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdown05">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+		{% include('admin/layouts/partials/_nav.html.twig') %}
 
-		<main class="container my-5"> {% block body %}{% endblock %}
+		<main class="container"> {% block body %}{% endblock %}
 			</main>
 
 			{% include('layouts/partials/_footer.html.twig') %}

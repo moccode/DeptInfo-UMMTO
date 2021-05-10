@@ -1,0 +1,9 @@
+@font-face {
+ font-family: "Montserrat";
+ src: url("fonts/Montserrat/Montserrat-Regular.ttf") format("truetype")
+}
+
+.alert-danger {
+    background: #d14130;
+    color: #fff;
+}

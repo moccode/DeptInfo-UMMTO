@@ -3,10 +3,6 @@
  src: url("fonts/Montserrat/Montserrat-Regular.ttf") format("truetype")
 }
 
-html, body {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-}
 .dropdown-toggle::after {
     display: none;
 }
@@ -44,4 +40,10 @@ border: none !important;
 
 .accordion-item {
     border: .0625rem solid #dadce0;
+}
+
+.alert-danger {
+    background: #d14130;
+    border-color: #d14130;
+    color: #fff;
 }

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -73,7 +74,7 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
         if (!$user) {
             // fail authentication with a custom error
-            $this->flashy->error('Email et/ou mot de passe incorrects !');
+            throw new CustomUserMessageAuthenticationException('Email et/ou mot de passe incorrects !.');
         }
 
         return $user;
@@ -82,8 +83,9 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     public function checkCredentials($credentials, UserInterface $user)
     {
         if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
-            $this->flashy->error('Email et/ou mot de passe incorrects !');
+            throw new CustomUserMessageAuthenticationException('Email et/ou mot de passe incorrect !');
         }
+        
         return true;
     }
 
@@ -97,16 +99,34 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
+        }   
+
+        if (in_array("ROLE_ADMIN", $token->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_home'));
         }
 
-
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        
     }
 
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+    /**
+     * Override to control what happens when the user hits a secure page
+     * but isn't logged in yet.
+     *
+     * @return RedirectResponse
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $url = $this->getLoginUrl();
+
+        return new RedirectResponse($url);
     }
 }
