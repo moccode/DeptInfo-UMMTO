@@ -194,7 +194,7 @@ abstract class User implements UserInterface
 
     public function getFullName(): ?string
     {
-        $this->fullName = $this->getPrenom() . ' ' . strtoupper($this->getNom());
+        $this->fullName = ucwords($this->getPrenom()) . ' ' . strtoupper($this->getNom());
 
         return $this->fullName;
     }
