@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% include('layouts/partials/_stylesheet.html.twig') %}
+	</head>
 
-<html
-	lang="fr">
-
-	{# Head #}
-	{% include('layouts/partials/_header.html.twig') %}
-	{# end Head #}
-
-	{# Body #}
-		<body class="bg-light"> {% if app.request.get('_route') not in ['app_login', 'app_registration_etudiant', 'app_registration_enseignant'] %}
+	<body class="bg-light">
+		{% if app.request.get('_route') not in ['app_login', 'app_registration_etudiant', 'app_registration_enseignant'] %}
 			{% include('layouts/partials/_nav.html.twig') %}
 		{% endif %}
-
 
 		<main class="container my-3"> {% block body %}{% endblock %}
 			</main>
@@ -20,5 +21,4 @@
 			{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 
 		</body>
-		{# end Body #}
 	</html>

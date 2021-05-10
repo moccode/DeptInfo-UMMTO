@@ -1,0 +1,22 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title "Créer une promotion"  %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Créer une promotion
+			</h3>
+			{# Formulaire #}
+			{{ include("admin/promotion/_form.html.twig") }}
+			{# Formulaire #}
+
+			{# Boutton annuler #}
+				<button class="btn btn-link mt-3" onclick="window.history.back();"> Annuler</button>
+			{# end Boutton annuler #}
+
+		</div>
+	</div>
+{% endblock %}

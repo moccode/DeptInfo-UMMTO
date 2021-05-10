@@ -1,0 +1,8 @@
+{{ form_start(formPromotion) }}
+{{ form_row(formPromotion.titre) }}
+<div class="d-grid gap-2 mt-3">
+	<button class="btn btn-primary" type="submit">
+		{{ submitButtonText|default('Créer') }}
+	</button>
+</div>
+{{ form_end(formPromotion) }}

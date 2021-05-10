@@ -1,0 +1,24 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title "Editer | " ~ promotion.titre  %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Editer la promotion
+				{{ promotion.titre }}
+			</h3>
+			{# formulaire d'édition #}
+			{{ include("admin/promotion/_form.html.twig", {"submitButtonText" : "Modifier"}) }}
+			{# end formulaire d'édition #}
+
+			{# boutton annuler #}
+				<button class="btn btn-link mt-3" onclick="window.history.back();"> Annuler</button>
+			{# end boutton annuler #}
+
+		</div>
+	</div>
+
+{% endblock %}
