@@ -24,12 +24,12 @@
 				<tr>
 					<th scope="row">{{ enseignant.id }}</th>
 					<td>{{ enseignant.nom|upper }}</td>
-					<td>{{ enseignant.nom|capitalize }}</td>
+					<td>{{ enseignant.prenom|capitalize }}</td>
 					<td>{{ enseignant.email }}</td>
 					<td>
 
 						{# Boutton de suppression d'un enseignant #}
-						<a class="text-decoration-none ms-4" href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cet enseignant ?') && document.getElementById('js-enseignant-form-delete{{enseignant.id}}').submit();">
+						<a class="text-decoration-none" href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cet enseignant ?') && document.getElementById('js-enseignant-form-delete{{enseignant.id}}').submit();">
 							<img src="{{ asset('icons/person-delete.svg') }}" alt="delete button">
 						</a>
 						{# formulaire caché pour supprimer un enseignant #}
