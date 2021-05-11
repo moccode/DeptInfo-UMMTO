@@ -4,12 +4,11 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-md-6 mx-auto">
-			<h3 class="mb-3 fw-normal text-center text-break">Créer une nouvelle classe de cours</h3>
-
+		<div class="col-lg-6 col-md-10 mx-auto">
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Créer une nouvelle classe de cours
+			</h3>
 			{{ include("classe_de_cours/_form.html.twig") }}
-			<button class="btn btn-link" onclick="window.history.back();">Annuler</button>
 		</div>
 	</div>
-
 {% endblock %}

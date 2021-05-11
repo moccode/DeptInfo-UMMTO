@@ -8,7 +8,8 @@
 	{% endfor %}
 
 	<div class="row">
-		<div class="col-md-6 mx-auto">
+		<div class="col-lg-6 col-md-8 mx-auto py-2">
+			<img class="mb-4 mx-auto d-block" src="{{ asset('img/ummto-logo.jpg') }}" alt="ummto-logo" width="39" height="50">
 			<h3 class="mb-3 fw-normal text-center">Créer un compte étudiant</h3>
 			{{ include("registration/_form.html.twig", {'etudiant' : etudiant}) }}
 			<p class="mt-3">

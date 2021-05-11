@@ -1,24 +1,31 @@
 <div class="col">
-	<div class="card shadow">
-		<img src="{{ asset('img/img_card.jpg') }}" class="card-img-top img-card h-100" alt="Image de la classe">
-
-		<div class="card-body">
-
-			<h5 class="card-title">
-				{{ classe.titre|u.truncate(20, '...', true) }}
-			</h5>
-
-			<h6 class="card-subtitle mt-1 mb-2 text-muted">
-				<figcaption class="blockquote-footer my-0">
-					Crée par
-					<cite title="Source Title">{{ classe.enseignant.fullName }}</cite>
-				</figcaption>
-			</h6>
-			<p class="card-text">{{ classe.description|u.truncate(23, '...', true) }}</p>
-			<p class="small text-muted">Mise à jour,
-				{{ classe.dateModification|ago(locale='fr') }}</p>
-			<a class="btn btn-primary" href="{{ path('app_classedecours_consulter', {'id_classedecours' : classe.id}) }}">Voir plus...</a>
-
+	<a href="{{ path('app_classedecours_consulter', {'id_classedecours' : classe.id}) }}" class="text-decoration-none link-dark">
+		<div class="card card-custom bg-white border-white border-0">
+			<div class="card-custom-img"></div>
+			<div class="card-custom-avatar">
+				<img class="img-fluid" src="{{ asset('img/photo-avatar-profil.png') }}" alt="Avatar"/>
+			</div>
+			<div class="card-body" style="overflow-y: auto">
+				<h4 class="card-title">{{ classe.titre|u.truncate(20, '...', true) }}</h4>
+				<h6 class="lead small">
+					{{ classe.promotion.titre|upper }}
+				</h6>
+				<h6 class="card-subtitle mt-1 mb-2">
+					<figcaption class="blockquote-footer my-0">
+						Crée par
+						<cite title="Source Title">{{ classe.enseignant.fullName }}</cite>
+					</figcaption>
+				</h6>
+				<p class="card-text">
+					{{ classe.description|u.truncate(23, '...', true) }}
+				</p>
+			</div>
+			<div class="card-footer border-top" style="background: inherit; border-color: inherit;">
+				<small class="text-muted">Dernière modification,
+					{{ classe.dateModification|ago(locale='fr') }}
+				</small>
+			</div>
 		</div>
-	</div>
+	</a>
+
 </div>

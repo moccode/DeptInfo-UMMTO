@@ -13,12 +13,12 @@
 		{% endblock %}
 	</head>
 
-	<body class="bg-light">
+	<body class="flex flex-col justify-between items-center min-h-screen">
 		{% if app.request.get('_route') not in ['app_login', 'app_registration_etudiant', 'app_registration_enseignant'] %}
 			{% include('layouts/partials/_nav.html.twig') %}
 		{% endif %}
 
-		<main class="container my-3"> {% block body %}{% endblock %}
+		<main class="container mb-auto mt-4"> {% block body %}{% endblock %}
 			</main>
 
 			{% include('layouts/partials/_footer.html.twig') %}
