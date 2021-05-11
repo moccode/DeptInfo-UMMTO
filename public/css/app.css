@@ -3,6 +3,28 @@
  src: url("fonts/Montserrat/Montserrat-Regular.ttf") format("truetype")
 }
 
+body {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.card.card-home {
+    min-height: 194px;
+}
+
+.card-home:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transition: .5s;
+}
+
+.card-img-full {
+    min-height: 240px;
+}
+
 .dropdown-toggle::after {
     display: none;
 }
@@ -16,9 +38,6 @@ border: none !important;
     color: #fff !important;
 }
 
-.card {
-    border: .0625rem solid #dadce0 !important;
-}
 .bg-light-card {
     background-color: rgb(134, 142, 150);
 }

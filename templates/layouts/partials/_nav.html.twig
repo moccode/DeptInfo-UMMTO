@@ -2,16 +2,15 @@
 	<div class="container">
 
 		<a class="navbar-brand" href="{{ path("app_home") }}">
-			<img src="{{ asset('img/bootstrap-logo.svg') }}" width="40" height="32" alt="Logo DeptInfo - UMMTO">
+			<span class="bg-white text-dark p-1 rounded fw-normal">DeptInfo</span>
 		</a>
 
 		{# Navigationel link #}
 		<ul class="navbar-nav ms-auto me-3">
-
 			{% if is_granted('ROLE_ENSEIGNANT') %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path("app_classedecours_creer") }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nouvelle classe">
-						<img src="{{ asset('icons/patch-plus.svg')}}">
+						<img src="{{ asset('icons/new_folder.svg')}}">
 					</a>
 				</li>
 			{% endif %}

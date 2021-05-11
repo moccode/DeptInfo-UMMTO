@@ -31,7 +31,7 @@ class ClasseDeCours
      *      message="Ce champ est requis."
      * )
      * @Assert\Length(
-     *      min = 4,
+     *      min = 2,
      *      max = 255,
      *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
      *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
