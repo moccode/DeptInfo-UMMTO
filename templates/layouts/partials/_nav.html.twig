@@ -2,15 +2,15 @@
 	<div class="container">
 
 		<a class="navbar-brand" href="{{ path("app_home") }}">
-			<span class="bg-white text-dark p-1 rounded fw-normal">DeptInfo</span>
+			DeptInfo
 		</a>
 
 		{# Navigationel link #}
-		<ul class="navbar-nav ms-auto me-3">
+		<ul class="navbar-nav ms-auto me-2">
 			{% if is_granted('ROLE_ENSEIGNANT') %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path("app_classedecours_creer") }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nouvelle classe">
-						<img src="{{ asset('icons/new_folder.svg')}}">
+						<img src="{{ asset('icons/bookmark-plus.svg')}}">
 					</a>
 				</li>
 			{% endif %}
@@ -21,7 +21,7 @@
 		{# Dropdown Profil #}
 		<div class="dropdown text-end">
 			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="{{ asset('icons/profil.svg') }}">
+				<img src="{{ asset('icons/person-circle.svg') }}">
 			</a>
 			<ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1">
 				{% if is_granted('ROLE_ENSEIGNANT') %}

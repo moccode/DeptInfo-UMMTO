@@ -4,11 +4,9 @@
 {{ form_row(formClasseDeCours.promotion) }}
 
 <div class="d-grid gap-2 mt-3">
-	<button class="btn btn-dark" type="submit">
+	<button class="btn btn-primary" type="submit">
 		{{ submitButtonText|default('Créer') }}
 	</button>
 </div>
 
 {{ form_end(formClasseDeCours) }}
-
-<button class="btn btn-link link-dark mt-3" onclick="window.history.back();">Annuler</button>
