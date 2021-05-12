@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\ClasseDeCours;
+use App\Entity\Commentaire;
 use App\Entity\Cours;
+use App\Form\CommentaireType;
 use App\Form\CoursType;
+use App\Repository\CommentaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,10 +64,10 @@ class CoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}", name="app_cours_consulter", methods={"GET"})
+     * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}", name="app_cours_consulter", methods={"GET", "POST"})
      * @Entity("cours", expr="repository.find(id_cours)")
      */
-    public function consulter(Cours $cours): Response
+    public function consulter(Cours $cours, Request $request, EntityManagerInterface $em, CommentaireRepository $commentaireRepository): Response
     {
         /**
          * On récupère l'extension du fichier cours
@@ -74,9 +77,36 @@ class CoursController extends AbstractController
 
         $extensionFichier = $info->getExtension();
 
+     
+        
+        // Partie commentaires d'un cours
+
+        $commentaire = new Commentaire;
+
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            
+            $commentaire
+                ->setUser($this->getUser())
+                ->setCours($cours);
+
+                $em->persist($commentaire);
+                $em->flush();
+
+            $this->flashy->success('Votre commentaire a été envoyé !');
+        }
+
+        $listeCommentaires = $commentaireRepository->findBy(['cours' => $cours], ['dateCreation' => 'DESC']);
+
         return $this->render('cours/consulter.html.twig', [
             'cours' => $cours,
-            'extensionFichier' => $extensionFichier
+            'extensionFichier' => $extensionFichier,
+            'formCommentaire' => $form->createView(),
+            'listeCommentaires' => $listeCommentaires
         ]);
     }
 

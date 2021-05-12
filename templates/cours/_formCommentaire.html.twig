@@ -1,0 +1,9 @@
+{{ form_start(formCommentaire) }}
+{{ form_errors(formCommentaire.contenu) }}
+<div class="input-group mb-3">
+	{{ form_widget(formCommentaire.contenu, {'attr': {'aria-describedby': 'button-send'}}) }}
+	<button class="btn btn-outline-primary btn-send-comment" type="submit" id="button-send">
+		<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewbox="0 0 24 24" width="20px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+	</button>
+</div>
+{{ form_end(formCommentaire) }}

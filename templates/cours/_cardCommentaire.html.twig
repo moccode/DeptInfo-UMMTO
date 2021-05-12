@@ -1,0 +1,28 @@
+<div class="card card-comment py-2 px-3 mb-3">
+	<div class="d-flex justify-content-between align-items-center">
+		<div class="user d-flex flex-row align-items-center">
+			<img src="{{ asset('img/photo-avatar-profil.png') }}" width="30" class="user-img rounded-circle mr-2">
+			<span class="ms-3">
+				<small class="font-weight-bold text-primary">{{ commentaire.user.fullName }}</small>
+			</span>
+		</div>
+		<small>{{ commentaire.dateModification|ago(locale='fr')}}</small>
+	</div>
+	<div class="body-card-comment my-2">
+		<small class="font-weight-bold">{{ commentaire.contenu }}</small>
+	</div>
+
+
+	{% if commentaire.user == app.user %}
+		<div class="action-card-comment d-flex align-items-center">
+
+			<a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?') && document.getElementById('js-commentaire-delete-form').submit();">
+				<small text="text-muted">Supprimer</small>
+			</a>
+
+			<form action="{{ path('app_commentaire_supprimer', { 'id_cours' : commentaire.cours.id, 'id_commentaire' : commentaire.id }) }}" method="POST" id="js-commentaire-delete-form" style="display: none;">
+				<input type="hidden" name="_method" value="DELETE">
+			</form>
+		</div>
+	{% endif %}
+</div>

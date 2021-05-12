@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Traits\Timestampable;
 use App\Repository\CommentaireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=CommentaireRepository::class)
@@ -25,6 +27,15 @@ class Commentaire
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(
+     *      message="Ce champ est requis."
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Le commentaire ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Le commentaire ne doit pas dépasser {{ limit }} caractères."
+     * )
      */
     private $contenu;
 
