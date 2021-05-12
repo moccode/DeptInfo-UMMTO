@@ -59,7 +59,7 @@
 			</a>
 		{% endif %}
 	{% else %}
-		{% for course in classeDeCours.cours %}
+		{% for course in classeDeCours.cours|sort|reverse %}
 
 			<p class="small fst-normal">
 				<figcaption class="figure-caption text-dark">

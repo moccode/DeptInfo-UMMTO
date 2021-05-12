@@ -1,9 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="navbar">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Administration</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
+		<a class="navbar-brand" href="{{ path("admin_home") }}">DeptInfo &middot; Administration</a>
 
 		<div class="collapse navbar-collapse" id="navbarsExample04">
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -16,10 +17,16 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path('admin_etudiant_index') }}">Étudiants</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('admin_classedecours_index') }}">Classes de cours</a>
+				</li>
+				<li class="nav-item d-md-none">
+					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+				</li>
 			</ul>
 		</div>
 
-		<div class="dropdown text-end">
+		<div class="dropdown text-end d-none d-md-block">
 			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle ps-3" id="dropdownAdmin" data-bs-toggle="dropdown" aria-expanded="false">
 				<img src="{{ asset('icons/profil.svg') }}">
 			</a>

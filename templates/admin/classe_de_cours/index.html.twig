@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title "Classes de cours | Administration" %}
+
+{% block body %}
+
+	<div class="table-responsive">
+		<table class="table table-dark table-striped table-responsive-md caption-top">
+			<caption>
+				Liste des classes de cours
+			</caption>
+
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Titre</th>
+					<th scope="col">Promotion</th>
+					<th scope="col">Enseignant</th>
+					<th scope="col">Date de création</th>
+					<th scope="col">Date de modification</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for classe in classesDeCours %}
+					<tr>
+						<th scope="row">{{ classe.id }}</th>
+						<td>{{ classe.titre }}</td>
+						<td>{{ classe.promotion.titre|upper }}</td>
+						<td>{{ classe.enseignant.fullName }}</td>
+						<td>{{ classe.dateCreation|date("d/m/Y") }}</td>
+						<td>{{ classe.dateModification|date("d/m/Y") }}</td>
+						<td>
+
+							{# Boutton de suppression d'une classe de cours #}
+							<a class="text-decoration-none" href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer cette classe de cours ?') && document.getElementById('js-classeDeCours-form-delete{{classe.id}}').submit();">
+								<img src="{{ asset('icons/delete.svg') }}" alt="delete button">
+							</a>
+							{# formulaire caché pour supprimer une classe de cours #}
+							<form action="{{ path('admin_classedecours_supprimer', {'id' : classe.id}) }}" method="POST" id="js-classeDeCours-form-delete{{classe.id}}" style="display: none;">
+								<input type="hidden" name="_method" value="DELETE">
+							</form>
+							{# end formulaire #}
+							{# Boutton de suppression classe de cours  #}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

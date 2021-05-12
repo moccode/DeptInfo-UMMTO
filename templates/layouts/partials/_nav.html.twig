@@ -23,8 +23,18 @@
 			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 				<img src="{{ asset('icons/person-circle.svg') }}">
 			</a>
-			<ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1">
+			<ul class="dropdown-menu dropdown-menu-end text-small text-center" aria-labelledby="dropdownUser1">
+
+				<div class="d-flex flex-column">
+					<small>
+						{{ app.user.fullName }}
+					</small>
+					<small>
+						{{ app.user.email }}
+					</small>
+				</div>
 				{% if is_granted('ROLE_ENSEIGNANT') %}
+					<li><hr class="dropdown-divider"></li>
 					<li>
 						<a class="dropdown-item" href="{{ path("app_classedecours_creer") }}">Nouvelle classe</a>
 					</li>
