@@ -89,7 +89,6 @@ class CoursController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
             $commentaire
                 ->setUser($this->getUser())
                 ->setCours($cours);

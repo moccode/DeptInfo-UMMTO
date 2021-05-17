@@ -2,4 +2,49 @@
 
 {% block title "Administration | Accueil " %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+
+		<div class="col">
+			<div class="card text-white bg-dark text-center">
+				<h5 class="card-header">Promotions</h5>
+				<div class="card-body">
+					<h5 class="card-title">{{ promotions|length }}</h5>
+					<a href="{{ path('admin_promotion_index') }}" class="btn btn-outline-light mt-1">Voir plus...</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col">
+			<div class="card text-white bg-dark text-center">
+				<h5 class="card-header">Étudiants</h5>
+				<div class="card-body">
+					<h5 class="card-title">{{ etudiants|length }}</h5>
+					<a href="{{ path('admin_etudiant_index') }}" class="btn btn-outline-light mt-1">Voir plus...</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col">
+			<div class="card text-white bg-dark text-center">
+				<h5 class="card-header">Enseignants</h5>
+				<div class="card-body">
+					<h5 class="card-title">{{ enseignants|length }}</h5>
+					<a href="{{ path('admin_enseignant_index') }}" class="btn btn-outline-light mt-1">Voir plus...</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col">
+			<div class="card text-white bg-dark text-center">
+				<h5 class="card-header">Classes de cours</h5>
+				<div class="card-body">
+					<h5 class="card-title">{{ classesDeCours|length }}</h5>
+					<a href="{{ path('admin_classedecours_index') }}" class="btn btn-outline-light mt-1">Voir plus...</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+{% endblock %}

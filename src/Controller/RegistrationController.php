@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Entity\Enseignant;
 use App\Entity\Etudiant;
 use App\Form\RegistrationEtudiantFormType;

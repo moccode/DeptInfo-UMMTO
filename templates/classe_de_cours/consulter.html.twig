@@ -9,6 +9,12 @@
 		<img src="{{ asset('img/gradients/Endless River.jpg') }}" class="card-img card-img-full">
 		<div class="card-img-overlay">
 			<h3 class="card-title">{{ classeDeCours.titre }}</h3>
+			<h6 class="card-subtitle my-2">
+				<figcaption class="blockquote-footer my-0 text-white">
+					Créee par
+					<cite title="Source Title">{{ classeDeCours.enseignant.fullName }}</cite>
+				</figcaption>
+			</h6>
 			<p class="h5 card-text lead">{{ classeDeCours.promotion.titre }}</p>
 			<p class="card-text">{{ classeDeCours.description }}</p>
 			<p class="small card-text">Dernière modification,
@@ -17,7 +23,7 @@
 
 			{% if is_granted('ROLE_ENSEIGNANT') and app.user == classeDeCours.enseignant %}
 
-				<a class="btn btn-outline-light mt-3" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
+				<a class="btn btn-outline-light" href="{{ path('app_cours_creer', {'id_classedecours' : classeDeCours.id }) }}">
 					Publier un nouveau cours
 				</a>
 

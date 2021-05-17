@@ -3,7 +3,7 @@
 		<div class="user d-flex flex-row align-items-center">
 			<img src="{{ asset('img/photo-avatar-profil.png') }}" width="30" class="user-img rounded-circle mr-2">
 			<span class="ms-3">
-				<small class="font-weight-bold text-primary">{{ commentaire.user.fullName }}</small>
+				<small class="font-weight-bold fw-bold">{{ commentaire.user.fullName }}</small>
 			</span>
 		</div>
 		<small>{{ commentaire.dateModification|ago(locale='fr')}}</small>
