@@ -17,4 +17,6 @@
 
 ###> custom env vars ###
 /public/uploads/
+/public/media/
+
 ###< custom env vars  ###
