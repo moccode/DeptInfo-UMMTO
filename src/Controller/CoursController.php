@@ -65,9 +65,10 @@ class CoursController extends AbstractController
 
     /**
      * @Route("/classes/{id_classedecours<[0-9]+>}/cours/{id_cours<[0-9]+>}", name="app_cours_consulter", methods={"GET", "POST"})
+     * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * @Entity("cours", expr="repository.find(id_cours)")
      */
-    public function consulter(Cours $cours, Request $request, EntityManagerInterface $em, CommentaireRepository $commentaireRepository): Response
+    public function consulter(Cours $cours, ClasseDeCours $classeDeCours, Request $request, EntityManagerInterface $em, CommentaireRepository $commentaireRepository): Response
     {
         /**
          * On récupère l'extension du fichier cours
@@ -97,6 +98,11 @@ class CoursController extends AbstractController
                 $em->flush();
 
             $this->flashy->success('Votre commentaire a été envoyé !');
+
+            return $this->redirectToRoute("app_cours_consulter", [
+                'id_classedecours' => $classeDeCours->getId(),
+                'id_cours' => $cours->getId()
+            ]);
         }
 
         $listeCommentaires = $commentaireRepository->findBy(['cours' => $cours], ['dateCreation' => 'DESC']);
