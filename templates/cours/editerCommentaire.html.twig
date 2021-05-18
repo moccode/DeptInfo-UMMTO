@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Modifier mon commentaire" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-6 col-md-10 mx-auto">
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Modifier mon commentaire
+			</h3>
+			{{ form_start(formCommentaire) }}
+			{{ form_row(formCommentaire.contenu) }}
+			<div class="d-grid gap-2 mt-3">
+				<button class="btn btn-primary" type="submit">
+					Modifier
+				</button>
+			</div>
+			{{ form_end(formCommentaire) }}
+		</div>
+	</div>
+{% endblock %}

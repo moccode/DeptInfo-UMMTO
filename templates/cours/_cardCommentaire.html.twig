@@ -14,13 +14,16 @@
 
 
 	{% if commentaire.user == app.user %}
-		<div class="action-card-comment d-flex align-items-center">
-
-			<a href="#" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?') && document.getElementById('js-commentaire-delete-form').submit();">
-				<small text="text-muted">Supprimer</small>
+		<div class="action-card-comment d-flex align-items-center small">
+			<a href="{{ path('app_commentaire_editer', { 'id_classedecours' : commentaire.cours.classeDeCours.id ,'id_cours' : commentaire.cours.id, 'id_commentaire' : commentaire.id }) }}" class="card-comment-link">
+				Modifier
 			</a>
 
-			<form action="{{ path('app_commentaire_supprimer', { 'id_cours' : commentaire.cours.id, 'id_commentaire' : commentaire.id }) }}" method="POST" id="js-commentaire-delete-form" style="display: none;">
+			<a href="#" class="ms-2 card-comment-link" onclick="event.preventDefault(); confirm('Êtes-vous sûr(e) de vouloir supprimer ce commentaire ?') && document.getElementById('js-commentaire-delete-form').submit();">
+				Supprimer
+			</a>
+
+			<form action="{{ path('app_commentaire_supprimer', { 'id_classedecours' : commentaire.cours.classeDeCours.id ,'id_cours' : commentaire.cours.id, 'id_commentaire' : commentaire.id }) }}" method="POST" id="js-commentaire-delete-form" style="display: none;">
 				<input type="hidden" name="_method" value="DELETE">
 			</form>
 		</div>
