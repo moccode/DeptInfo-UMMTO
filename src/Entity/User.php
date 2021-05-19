@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -18,6 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\DiscriminatorMap({"etudiant"="Etudiant", "enseignant"="Enseignant", "admin"="Admin"})
  * @UniqueEntity(fields={"email"}, message="Cette adresse email est déja utilisé par un autre compte !")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
+ * 
  */
 abstract class User implements UserInterface
 {
@@ -103,6 +107,13 @@ abstract class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photoDeProfil;
+
+    /**
+     * @Vich\UploadableField(mapping="profil_image", fileNameProperty="photoDeProfil")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -261,6 +272,25 @@ abstract class User implements UserInterface
         $this->photoDeProfil = $photoDeProfil;
 
         return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setDateModification(new \DateTimeImmutable);
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 
 }
