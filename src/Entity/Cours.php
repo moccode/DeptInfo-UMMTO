@@ -63,9 +63,9 @@ class Cours
      * @Vich\UploadableField(mapping="cours_file", fileNameProperty="nomFichierCours")
      * 
      * @Assert\File(
-     *     maxSize = "10M",
-     *     maxSizeMessage = "Le fichier ne doit pas dépasser 10MO !",
-     *     uploadIniSizeErrorMessage = "Le fichier ne doit pas dépasser 10MO !",
+     *     maxSize = "20M",
+     *     maxSizeMessage = "Le fichier ne doit pas dépasser 20MO !",
+     *     uploadIniSizeErrorMessage = "Le fichier ne doit pas dépasser 20MO !",
      *     mimeTypes = {
      *          "application/pdf", 
      *          "application/x-pdf", 

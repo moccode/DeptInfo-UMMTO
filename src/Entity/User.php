@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -23,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @Vich\Uploadable
  * 
  */
-abstract class User implements UserInterface
+abstract class User implements UserInterface, \Serializable
 {
 
     use Timestampable;
@@ -110,7 +111,17 @@ abstract class User implements UserInterface
 
     /**
      * @Vich\UploadableField(mapping="profil_image", fileNameProperty="photoDeProfil")
-     * 
+     * @Assert\Image(
+     *     maxSize = "25M",
+     *     maxSizeMessage = "La photo de profil ne doit pas dépasser 25MO !",
+     *     uploadIniSizeErrorMessage = "La photo de profil ne doit pas dépasser 25MO !",
+     *     mimeTypes = {
+     *          "image/jpeg",
+     *          "image/jpg",
+     *          "image/png"
+     *      },
+     *     mimeTypesMessage = "Veuillez sélectionner un format d'image valide (JPEG ou PNG) !"
+     * )
      * @var File|null
      */
     private $imageFile;
@@ -293,4 +304,21 @@ abstract class User implements UserInterface
         return $this->imageFile;
     }
 
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+        ) = unserialize($serialized);
+    }
 }
