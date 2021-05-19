@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,9 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"etudiant"="Etudiant", "enseignant"="Enseignant", "admin"="Admin"})
  * @UniqueEntity(fields={"email"}, message="Cette adresse email est déja utilisé par un autre compte !")
+ * @ORM\HasLifecycleCallbacks
  */
 abstract class User implements UserInterface
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -93,6 +98,11 @@ abstract class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="user", orphanRemoval=true)
      */
     private $commentaires;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photoDeProfil;
 
     public function __construct()
     {
@@ -240,4 +250,17 @@ abstract class User implements UserInterface
 
         return $this;
     }
+
+    public function getPhotoDeProfil(): ?string
+    {
+        return $this->photoDeProfil;
+    }
+
+    public function setPhotoDeProfil(?string $photoDeProfil): self
+    {
+        $this->photoDeProfil = $photoDeProfil;
+
+        return $this;
+    }
+
 }

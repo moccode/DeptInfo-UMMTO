@@ -140,3 +140,7 @@ border: none !important;
 .text-small {
     font-size: 85%;
 }
+
+.profil-info {
+    box-shadow: 0 0 15px rgb(10 10 10 / 30%);
+}
