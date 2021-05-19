@@ -43,6 +43,7 @@ class ProfilController extends AbstractController
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer ?',
                 'download_uri' => false,
+                'imagine_pattern' => 'squared_thumbnail_medium'
         ])
         ->getForm();
 
