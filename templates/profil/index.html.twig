@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Mon profil | DeptInfo" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="profil-info col-lg-5 col-md-10 mx-auto py-3 text-center border border-1">
+			<img class="rounded-circle border mb-2" src="{{ app.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(app.user) }}" alt="photo de profil" height=" 175" width=" 175">
+			<h2 class="fw-bold">{{app.user.fullName}}</h2>
+			<h6 class="fw-light">{{app.user.email}}</h6>
+			{% if is_granted("ROLE_ETUDIANT") %}
+				<h5 class="fw-normal">{{app.user.promotion.titre}}</h5>
+			{% endif %}
+
+			<div class="list-group text-small">
+				<a href="{{ path('app_profil_photodeprofil') }}" class="list-group-item list-group-item">
+					Modifier la photo de profil
+				</a>
+				<a href="{{ path('app_profil_nometprenom') }}" class="list-group-item list-group-item">
+					Modifier le nom et le prénom
+				</a>
+				{% if is_granted("ROLE_ETUDIANT") %}
+					<a href="{{ path('app_profil_promotion') }}" class="list-group-item list-group-item">
+						Modifier la promotion
+					</a>
+				{% endif %}
+				<a href="{{ path('app_profil_email') }}" class="list-group-item list-group-item">
+					Modifier l'adresse email
+				</a>
+				<a href="#" class="list-group-item list-group-item">
+					Modifier le mot de passe
+				</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

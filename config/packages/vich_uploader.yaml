@@ -5,4 +5,8 @@ vich_uploader:
        cours_file:
            uri_prefix: /uploads/cours
            upload_destination: '%kernel.project_dir%/public/uploads/cours'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer       
+       profil_image:
+           uri_prefix: /uploads/users
+           upload_destination: '%kernel.project_dir%/public/uploads/users'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

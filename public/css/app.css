@@ -140,3 +140,20 @@ border: none !important;
 .text-small {
     font-size: 85%;
 }
+
+.profil-info {
+    border: 1px solid #ced4da;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: .5rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,.15);
+}
+
+.badge-danger {
+    background: #d14130;
+    border-color: #d14130;
+    color: #fff;
+}
