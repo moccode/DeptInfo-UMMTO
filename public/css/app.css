@@ -142,5 +142,12 @@ border: none !important;
 }
 
 .profil-info {
-    box-shadow: 0 0 15px rgb(10 10 10 / 30%);
+    border: 1px solid #ced4da;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: .5rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,.15);
 }

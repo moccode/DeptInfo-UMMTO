@@ -3,7 +3,7 @@
 		<div class="card card-custom bg-white border-white border-0">
 			<div class="card-custom-img"></div>
 			<div class="card-custom-avatar">
-				<img class="img-fluid" src="{{ asset('img/photo-avatar-profil.png') }}" alt="Avatar"/>
+				<img class="img-fluid" src="{{ classe.enseignant.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(classe.enseignant) }}" alt="Avatar"/>
 			</div>
 			<div class="card-body" style="overflow-y: auto">
 				<h4 class="card-title">{{ classe.titre|u.truncate(20, '...', true) }}</h4>

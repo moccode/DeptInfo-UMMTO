@@ -5,8 +5,8 @@
 {% block body %}
 
 	<div class="row">
-		<div class="profil-info col-lg-6 col-md-10 mx-auto py-3 text-center border border-1">
-			<img class="rounded-circle mb-2" src="{{ asset("img/photo-avatar-profil.png")}}" alt="Photo de profil" height="175" width="175">
+		<div class="profil-info col-lg-5 col-md-10 mx-auto py-3 text-center border border-1">
+			<img class="rounded-circle border mb-2" src="{{ app.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(app.user) }}" alt="photo de profil" height=" 175" width=" 175">
 			<h2 class="fw-bold">{{app.user.fullName}}</h2>
 			<h6 class="fw-light">{{app.user.email}}</h6>
 			{% if is_granted("ROLE_ETUDIANT") %}

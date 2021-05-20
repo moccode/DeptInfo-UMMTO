@@ -112,9 +112,9 @@ abstract class User implements UserInterface, \Serializable
     /**
      * @Vich\UploadableField(mapping="profil_image", fileNameProperty="photoDeProfil")
      * @Assert\Image(
-     *     maxSize = "8M",
-     *     maxSizeMessage = "La photo de profil ne doit pas dépasser 8MO !",
-     *     uploadIniSizeErrorMessage = "La photo de profil ne doit pas dépasser 8MO !",
+     *     maxSize = "10M",
+     *     maxSizeMessage = "La photo de profil ne doit pas dépasser 10MO !",
+     *     uploadIniSizeErrorMessage = "La photo de profil ne doit pas dépasser 10MO !",
      *     mimeTypes = {
      *          "image/jpeg",
      *          "image/jpg",
