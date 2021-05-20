@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Promotion | Profil" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-4 col-md-10 mx-auto">
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Modifier la promotion
+			</h3>
+			{{ include("profil/_form/_formPromotion.html.twig") }}
+		</div>
+	</div>
+{% endblock %}

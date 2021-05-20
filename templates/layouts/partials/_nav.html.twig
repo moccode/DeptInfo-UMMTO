@@ -21,7 +21,7 @@
 		{# Dropdown Profil #}
 		<div class="dropdown text-end">
 			<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle ps-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-				<img class="rounded-circle img-fluid" height="32" width="32" src="{{ app.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(app.user) }}">
+				<img class="rounded-circle" height="32" width="32" src="{{ app.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(app.user) }}">
 			</a>
 			<ul class="dropdown-menu dropdown-menu-end text-small text-center" aria-labelledby="dropdownUser1">
 

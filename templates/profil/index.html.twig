@@ -17,11 +17,11 @@
 				<a href="{{ path('app_profil_photodeprofil') }}" class="list-group-item list-group-item">
 					Modifier la photo de profil
 				</a>
-				<a href="#" class="list-group-item list-group-item">
+				<a href="{{ path('app_profil_nometprenom') }}" class="list-group-item list-group-item">
 					Modifier le nom et le prénom
 				</a>
 				{% if is_granted("ROLE_ETUDIANT") %}
-					<a href="#" class="list-group-item list-group-item">
+					<a href="{{ path('app_profil_promotion') }}" class="list-group-item list-group-item">
 						Modifier la promotion
 					</a>
 				{% endif %}

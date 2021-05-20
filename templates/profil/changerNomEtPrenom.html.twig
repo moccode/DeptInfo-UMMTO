@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Nom et prénom | Profil" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-4 col-md-10 mx-auto">
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Changer le nom et prénom
+			</h3>
+			{{ include("profil/_form/_formNomEtPrenom.html.twig") }}
+		</div>
+	</div>
+{% endblock %}
