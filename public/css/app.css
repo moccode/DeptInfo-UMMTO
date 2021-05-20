@@ -151,3 +151,9 @@ border: none !important;
     overflow: hidden;
     border-top: 1px solid rgba(0,0,0,.15);
 }
+
+.badge-danger {
+    background: #d14130;
+    border-color: #d14130;
+    color: #fff;
+}

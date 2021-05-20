@@ -1,7 +1,7 @@
 <div class="card card-comment py-2 px-3 mb-3">
 	<div class="d-flex justify-content-between align-items-center">
 		<div class="user d-flex flex-row align-items-center">
-			<img src="{{ commentaire.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(commentaire.user) }}" width="30" class="user-img rounded-circle mr-2">
+			<img src="{{ commentaire.user.photoDeProfil is null ? asset("img/photo-avatar-profil.png") : vich_uploader_asset(commentaire.user) }}" height="30" width="30" class="user-img rounded-circle mr-2">
 			<span class="ms-3">
 				<small class="font-weight-bold fw-bold">{{ commentaire.user.fullName }}</small>
 			</span>
@@ -11,7 +11,6 @@
 	<div class="body-card-comment my-2">
 		<small class="font-weight-bold">{{ commentaire.contenu }}</small>
 	</div>
-
 
 	{% if commentaire.user == app.user %}
 		<div class="action-card-comment d-flex align-items-center small">
