@@ -157,3 +157,6 @@ border: none !important;
     border-color: #d14130;
     color: #fff;
 }
+footer, footer a {
+    color: #6c757d;
+}

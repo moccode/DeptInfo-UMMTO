@@ -1,10 +1,21 @@
-<footer class="container text-center my-2">
-	<p class="text-muted">
-		<small>
-			&copy;
-			{{ 'now'|date('Y') }}
-			&middot; Université Mouloud Mammeri de Tizi Ouzou (UMMTO)
-		</small>
+<footer class="d-flex flex-column justify-content-center align-items-center text-small">
+	{% if app.user %}
+		<ul class="nav list-footer">
+			<li>
+				<a class="text-decoration-none" href="{{ path("app_home") }}">Accueil</a>
+			</li>
+			<li class="mx-2">
+				&middot;
+			</li>
+			<li>
+				<a class="text-decoration-none" href="#">Nous contacter</a>
+			</li>
+		</ul>
+	{% endif %}
+	<p class="mb-2">
+		&copy;
+		{{ 'now'|date('Y') }}
+		&middot; Université Mouloud Mammeri de Tizi Ouzou (UMMTO)
 	</p>
 </footer>
 
