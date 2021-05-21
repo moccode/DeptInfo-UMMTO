@@ -1,6 +1,12 @@
 {{ form_start(formInscription) }}
-{{ form_row(formInscription.nom) }}
-{{ form_row(formInscription.prenom) }}
+<div class="row">
+	<div class="col-md-6">
+		{{ form_row(formInscription.nom) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(formInscription.prenom) }}
+	</div>
+</div>
 {% if etudiant is defined %}
 	{{ form_row(formInscription.promotion) }}
 {% endif %}
