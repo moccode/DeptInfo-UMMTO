@@ -7,13 +7,8 @@
 	<div class="row">
 		<div class="col-lg-4 col-md-10 mx-auto">
 			<h3 class="mb-3 fw-normal text-center text-break">
-				Modifier l'adresse email
+				Modifier l'adresse e-mail
 			</h3>
-			{% if erreur is not null %}
-				<div class="alert alert-danger">
-					{{ erreur }}
-				</div>
-			{% endif %}
 			{{ include("profil/_form/_formEmail.html.twig") }}
 		</div>
 	</div>

@@ -1,0 +1,9 @@
+{{ form_start(formMotDePasse) }}
+{{ form_row(formMotDePasse.currentPassword, {'attr' : {'class' : 'mb-3'}}) }}
+{{ form_row(formMotDePasse.plainPassword) }}
+<div class="d-grid gap-2 mt-3">
+	<button class="btn btn-primary" type="submit">
+		Modifier
+	</button>
+</div>
+{{ form_end(formMotDePasse) }}

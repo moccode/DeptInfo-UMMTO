@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Promotion;
+use App\Form\ChangePasswordFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -13,8 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+/**
+ * @Route("/profil")
+ */
 class ProfilController extends AbstractController
 {
 
@@ -24,7 +29,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil", name="app_profil_index")
+     * @Route("", name="app_profil_index")
      */
     public function index(): Response
     {
@@ -32,7 +37,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/photodeprofil", name="app_profil_photodeprofil", methods={"GET","PUT"})
+     * @Route("/photodeprofil", name="app_profil_photodeprofil", methods={"GET","PUT"})
      */
     public function modifierPhotoDeProfil(Request $request, EntityManagerInterface $em): Response
     {
@@ -70,7 +75,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/nometprenom", name="app_profil_nometprenom", methods={"GET","PUT"})
+     * @Route("/nometprenom", name="app_profil_nometprenom", methods={"GET","PUT"})
      */
     public function modifierNomEtPrenom(Request $request, EntityManagerInterface $em): Response
     {
@@ -95,7 +100,7 @@ class ProfilController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->flashy->success('Le nom et le prénom ont été mis à jour !');
+            $this->flashy->success('Vos nom et prénom ont été mis à jour.');
 
             return $this->redirectToRoute("app_profil_index");
         }
@@ -106,7 +111,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/promotion", name="app_profil_promotion", methods={"GET","PUT"})
+     * @Route("/promotion", name="app_profil_promotion", methods={"GET","PUT"})
      */
     public function modifierPromotion(Request $request, EntityManagerInterface $em): Response
     {
@@ -129,7 +134,7 @@ class ProfilController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->flashy->success('La promotion a été mise à jour !');
+            $this->flashy->success('Votre promotion a été mise à jour.');
 
             return $this->redirectToRoute("app_profil_index");
         }
@@ -140,13 +145,12 @@ class ProfilController extends AbstractController
     }
 
      /**
-     * @Route("/profil/email", name="app_profil_email", methods={"GET","PUT"})
+     * @Route("/email", name="app_profil_email", methods={"GET","PUT"})
      */
-    public function modifierEmail(Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    public function modifierEmail(Request $request, EntityManagerInterface $em): Response
     {
 
         $user = $this->getUser();
-        $erreur = null;
 
         $form = $this->createFormBuilder($user, [
             'method' => 'PUT'
@@ -163,14 +167,47 @@ class ProfilController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->flashy->success("L'adresse email a été mise à jour !");
+            $this->flashy->success("Votre adresse e-mail a été mise à jour.");
 
             return $this->redirectToRoute("app_profil_index");
         }
 
         return $this->render('profil/modifierEmail.html.twig', [
-            'formEmail' => $form->createView(),
-            'erreur' => $erreur
+            'formEmail' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/motdepasse", name="app_profil_motdepasse", methods={"GET","PUT"})
+     */
+    public function modifierMotDePasse(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(ChangePasswordFormType::class, null , [
+            'method' => 'PUT',
+            'current_password_is_required' => true
+        ]);
+
+        $form1 = $this->createForm(ChangePasswordFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->flashy->success("Votre mot de passe a été mis à jour.");
+
+            return $this->redirectToRoute("app_profil_index");
+        }
+
+        return $this->render('profil/modifierMotDePasse.html.twig', [
+            'formMotDePasse' => $form->createView()
         ]);
     }
 }
