@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Nous contacter | DeptInfo" %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-lg-4 col-md-10 mx-auto">
+			<h3 class="mb-3 fw-normal text-center text-break">
+				Nous contacter
+			</h3>
+			{{ form_start(formContact) }}
+			{{ form_row(formContact.objet) }}
+			{{ form_row(formContact.message, {'attr' : {'rows' : 6 } }) }}
+			<div class="d-grid gap-2 mt-3">
+				<button class="btn btn-primary" type="submit">
+					Envoyer
+				</button>
+			</div>
+			{{ form_end(formContact) }}
+		</div>
+	</div>
+
+{% endblock %}
