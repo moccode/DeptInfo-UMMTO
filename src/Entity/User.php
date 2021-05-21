@@ -126,6 +126,11 @@ abstract class User implements UserInterface, \Serializable
      */
     private $imageFile;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $activationCompte = false;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -320,5 +325,17 @@ abstract class User implements UserInterface, \Serializable
             $this->email,
             $this->password,
         ) = unserialize($serialized);
+    }
+
+    public function getActivationCompte(): ?bool
+    {
+        return $this->activationCompte;
+    }
+
+    public function setActivationCompte(bool $activationCompte): self
+    {
+        $this->activationCompte = $activationCompte;
+
+        return $this;
     }
 }

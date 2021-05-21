@@ -3,12 +3,12 @@
 {% block title "Inscription | Enseignants" %}
 
 {% block body %}
-	{% for flashError in app.flashes('verify_email_error') %}
-		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
-	{% endfor %}
 
 	<div class="row">
 		<div class="col-lg-6 col-md-8 mx-auto py-2">
+			{% for flashError in app.flashes('verify_email_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
 			<img class="mb-4 mx-auto d-block" src="{{ asset('img/ummto-logo.jpg') }}" alt="ummto-logo" width="39" height="50">
 			<h3 class="mb-3 fw-normal text-center">Créer un compte enseignant</h3>
 			{{ include("registration/_form.html.twig") }}

@@ -82,11 +82,17 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        // Si le mot de passe est incorrect 
         if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
             throw new CustomUserMessageAuthenticationException('Email et/ou mot de passe incorrect !');
         }
+        // Si le compte n'est pas activé 
+        elseif (!$user->getActivationCompte()) {
+            throw new CustomUserMessageAuthenticationException("Votre compte n'est pas activé !");
+        } else {
+            return true;
+        }
         
-        return true;
     }
 
     /**

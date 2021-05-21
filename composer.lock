@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb72e57cae5d66a69549a232808887c2",
+    "content-hash": "0999d0b6d6452bcd304490aa9da53d80",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -6810,16 +6810,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.2.7",
+            "version": "v5.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "e37ece5242564bceea54d709eafc948377ec9749"
+                "reference": "61af68dba333e2d376a325a29c2a3f2a605b4876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/e37ece5242564bceea54d709eafc948377ec9749",
-                "reference": "e37ece5242564bceea54d709eafc948377ec9749",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/61af68dba333e2d376a325a29c2a3f2a605b4876",
+                "reference": "61af68dba333e2d376a325a29c2a3f2a605b4876",
                 "shasum": ""
             },
             "require": {
@@ -6883,7 +6883,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v5.2.7"
+                "source": "https://github.com/symfony/translation/tree/v5.2.9"
             },
             "funding": [
                 {
@@ -6899,7 +6899,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-01T08:15:21+00:00"
+            "time": "2021-05-16T13:07:46+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -7617,6 +7617,56 @@
                 }
             ],
             "time": "2021-04-29T20:47:09+00:00"
+        },
+        {
+            "name": "symfonycasts/verify-email-bundle",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
+                "reference": "8c21aa9aa6b7123afed213e72485e8dad75e5dcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/8c21aa9aa6b7123afed213e72485e8dad75e5dcf",
+                "reference": "8c21aa9aa6b7123afed213e72485e8dad75e5dcf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/config": "^4.4 | ^5.0",
+                "symfony/dependency-injection": "^4.4 | ^5.0",
+                "symfony/deprecation-contracts": "^2.2",
+                "symfony/http-kernel": "^4.4 | ^5.0",
+                "symfony/routing": "^4.4 | ^5.0"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "<4.4"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^2.0",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "symfony/framework-bundle": "^4.4 | ^5.0",
+                "symfony/phpunit-bridge": "^5.0",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SymfonyCasts\\Bundle\\VerifyEmail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple, stylish Email Verification for Symfony",
+            "support": {
+                "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.5.0"
+            },
+            "time": "2021-05-05T18:08:21+00:00"
         },
         {
             "name": "twig/extra-bundle",

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -18,8 +19,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connexion", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
+
         if ($this->getUser()) {
             $this->flashy->error("Vous êtes déja connecté !");
             return $this->redirectToRoute('app_home');
