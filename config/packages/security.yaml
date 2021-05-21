@@ -51,6 +51,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reinitialiser-motdepasse, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/etudiants/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/enseignants/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/verifier/email, roles: IS_AUTHENTICATED_ANONYMOUSLY }

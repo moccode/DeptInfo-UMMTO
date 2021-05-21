@@ -9,6 +9,7 @@
 			{{ error.messageKey|trans(error.messageData, 'security') }}
 		</div>
 	{% endif %}
+	
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
@@ -21,13 +22,20 @@
 
 	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
+	<p class="my-1 text-end">
+		<small>
+			<a href="{{ path("app_forgot_password_request") }}">Mot de passe oublié ?</a>
+		</small>
+	</p>
+
 	<div class="d-grid gap-2 mt-3">
 		<button class="btn btn-primary" type="submit">
 			Connexion
 		</button>
 	</div>
 
-	<p class="mt-3">
+
+	<p class="my-3 text-center">
 		<small>
 			Vous n'avez pas encore de compte ?
 			<!-- lancer trigger modal -->

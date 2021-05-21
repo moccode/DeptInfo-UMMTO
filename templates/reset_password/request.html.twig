@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Réinitialisation de mot de passe" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-5 col-md-8 mx-auto py-2">
+
+			{% for flashError in app.flashes('reset_password_error') %}
+				<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+			{% endfor %}
+
+			{% if not app.user %}
+				<img class="mb-4 mx-auto d-block" src="{{ asset('img/ummto-logo.jpg') }}" alt="ummto-logo" width="77" height="100">
+			{% endif %}
+
+			<h3 class="mb-3 fw-normal text-center">Réinitialiser votre mot de passe</h3>
+
+			{{ form_start(requestForm) }}
+			{{ form_row(requestForm.email, {'attr': {'value' : app.user.email ?? '' }}) }}
+			<div class="mb-3">
+				<small>
+					Entrer votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+				</small>
+			</div>
+
+			<div class="d-grid gap-2 mt-3">
+				<button class="btn btn-primary">
+					Envoyer un e-mail de réinitialisation du mot de passe
+				</button>
+			</div>
+			{{ form_end(requestForm) }}
+		</div>
+	</div>
+
+{% endblock %}
