@@ -44,7 +44,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $user = new Admin;
+        $user = new Enseignant;
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         
@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-                ->setRoles(['ROLE_ADMIN']);
+                ->setRoles(['ROLE_ENSEIGNANT']);
 
             $em->persist($user);
             $em->flush();
