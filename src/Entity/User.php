@@ -19,7 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"etudiant"="Etudiant", "enseignant"="Enseignant", "admin"="Admin"})
- * @UniqueEntity(fields={"email"}, message="Cette adresse email est déja utilisé par un autre compte !")
+ * @UniqueEntity(fields={"email"}, message="Cette adresse email est déja utilisé par un autre compte.")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  * 
@@ -44,13 +44,13 @@ abstract class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
-     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
+     *      minMessage = "Le nom ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères."
      * )
      * @Assert\Regex(
      *     pattern     = "/^[a-z]+$/i",
      *     htmlPattern = "[a-zA-Z]+",
-     *     message = "Ce champ ne peut contenir que des lettres."
+     *     message = "Le nom ne peut contenir que des lettres."
      * )
      */
     private $nom;
@@ -63,13 +63,13 @@ abstract class User implements UserInterface, \Serializable
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
-     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
+     *      minMessage = "Le prénom ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Le prénom ne doit pas dépasser {{ limit }} caractères."
      * )
      * @Assert\Regex(
      *     pattern     = "/^[a-z]+$/i",
      *     htmlPattern = "[a-zA-Z]+",
-     *     message = "Ce champ ne peut contenir que des lettres."
+     *     message = "Le prénom ne peut contenir que des lettres."
      * )
      */
     private $prenom;
@@ -80,7 +80,7 @@ abstract class User implements UserInterface, \Serializable
      *      message="Ce champ est requis."
      * )
      * @Assert\Email(
-     *     message = "L'adresse email '{{ value }}' n'est pas valide."
+     *     message = "L'adresse e-mail {{ value }} n'est pas valide."
      * )
      * 
      */

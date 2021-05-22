@@ -33,8 +33,8 @@ class ClasseDeCours
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Ce champ ne doit pas être inférieure à {{ limit }} caractères.",
-     *      maxMessage = "Ce champ ne doit pas dépasser {{ limit }} caractères."
+     *      minMessage = "Le titre ne doit pas être inférieure à {{ limit }} caractères.",
+     *      maxMessage = "Le titre ne doit pas dépasser {{ limit }} caractères."
      * )
      */
     private $titre;

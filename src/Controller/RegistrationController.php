@@ -16,10 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Security\EmailVerifier;
-use App\Security\UsersAuthenticator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -36,20 +34,24 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/enseignants/inscription", name="app_registration_enseignant")
+     * @Route("/enseignant/inscription", name="app_registration_enseignant")
      */
     public function inscriptionEnseignant(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em): Response
     {
+        // Si un utilisateur est connecté
         if ($this->getUser()) {
             $this->flashy->error("Vous êtes déja connecté !");
             return $this->redirectToRoute('app_home');
         }
 
-        $user = new Enseignant;
+        $user = new Admin;
+
         $form = $this->createForm(RegistrationFormType::class, $user);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             // On encode le mot de passe
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -57,7 +59,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-                ->setRoles(['ROLE_ENSEIGNANT']);
+                ->setRoles(['ROLE_ADMIN']);
 
             $em->persist($user);
             $em->flush();
@@ -71,7 +73,7 @@ class RegistrationController extends AbstractController
                 ->htmlTemplate('emails/registration/confirmation_email.html.twig')
             );
 
-            $this->flashy->success("Un e-mail d'activation a été envoyé à votre adresse e-mail !");
+            $this->flashy->success("Un e-mail d'activation a été envoyé à votre adresse e-mail.");
 
             return $this->redirectToRoute('app_login');
         }
@@ -82,17 +84,20 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/etudiants/inscription", name="app_registration_etudiant")
+     * @Route("/etudiant/inscription", name="app_registration_etudiant")
      */
     public function inscriptionEtudiant(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em): Response
     {
+        // Si un utilisateur est connecté
         if ($this->getUser()) {
             $this->flashy->error("Vous êtes déja connecté !");
             return $this->redirectToRoute('app_home');
         }
 
         $user = new Etudiant;
+
         $form = $this->createForm(RegistrationEtudiantFormType::class, $user);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,7 +122,7 @@ class RegistrationController extends AbstractController
                 ->htmlTemplate('emails/registration/confirmation_email.html.twig')
             );
 
-            $this->flashy->success("Un e-mail d'activation a été envoyé à votre adresse e-mail !");
+            $this->flashy->success("Un e-mail d'activation a été envoyé à votre adresse e-mail.");
 
             return $this->redirectToRoute('app_login');
 
@@ -155,7 +160,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->flashy->success('Votre compte a été activé !');
+        $this->flashy->success('Votre compte a été activé.');
 
         return $this->redirectToRoute('app_login');
     }

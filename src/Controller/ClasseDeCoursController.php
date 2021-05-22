@@ -16,7 +16,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
+/**
+ * @Route("/classes")
+ */
 class ClasseDeCoursController extends AbstractController
 {
 
@@ -26,7 +28,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes", name="app_classedecours_index", methods={"GET"})
+     * @Route("", name="app_classedecours_index", methods={"GET"})
      */
     public function index(ClasseDeCoursRepository $classeDeCoursRepository): Response
     {
@@ -36,10 +38,10 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/creer", name="app_classedecours_creer", methods={"GET","POST"})
+     * @Route("/creer", name="app_classedecours_creer", methods={"GET","POST"})
      * @isGranted("ROLE_ENSEIGNANT", statusCode=401, message="Accès non autorisé")
      */
-    public function creer(Request $request, EntityManagerInterface $em, FlashyNotifier $flashy): Response
+    public function creer(Request $request, EntityManagerInterface $em): Response
     {
         $classeDeCours = new ClasseDeCours();
         $form = $this->createForm(ClasseDeCoursType::class, $classeDeCours);
@@ -54,7 +56,7 @@ class ClasseDeCoursController extends AbstractController
             $em->persist($classeDeCours);
             $em->flush();
 
-            $this->flashy->success('La classe de cours a bien été créee !');
+            $this->flashy->success('La classe de cours a bien été créee.');
 
             return $this->redirectToRoute("app_classedecours_consulter", [
                 'id_classedecours' => $classeDeCours->getId()
@@ -67,7 +69,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter", methods={"GET"})
+     * @Route("/{id_classedecours<[0-9]+>}", name="app_classedecours_consulter", methods={"GET"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * 
      */
@@ -76,9 +78,8 @@ class ClasseDeCoursController extends AbstractController
         return $this->render('classe_de_cours/consulter.html.twig', compact("classeDeCours"));
     }
 
-
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer", methods={"GET","PUT"})
+     * @Route("/{id_classedecours<[0-9]+>}/editer", name="app_classedecours_editer", methods={"GET","PUT"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
      */
@@ -91,17 +92,16 @@ class ClasseDeCoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $em->persist($classeDeCours);
             $em->flush();
 
-
-            $this->flashy->success('Classe de cours mise à jour !');
+            $this->flashy->success('Classe de cours mise à jour.');
 
             return $this->redirectToRoute("app_classedecours_consulter", [
                 'id_classedecours' => $classeDeCours->getId()
             ]);
         }
-
 
         return $this->render('classe_de_cours/editer.html.twig', [
             "classeDeCours" => $classeDeCours,
@@ -110,7 +110,7 @@ class ClasseDeCoursController extends AbstractController
     }
 
     /**
-     * @Route("/classes/{id_classedecours<[0-9]+>}/supprimer", name="app_classedecours_supprimer", methods={"DELETE"})
+     * @Route("/{id_classedecours<[0-9]+>}/supprimer", name="app_classedecours_supprimer", methods={"DELETE"})
      * @Entity("classeDeCours", expr="repository.find(id_classedecours)")
      * @Security("is_granted('ROLE_ENSEIGNANT') and classeDeCours.getEnseignant() == user", statusCode=401, message="Accès non autorisé")
      * 

@@ -14,6 +14,7 @@
 
 	{% if commentaire.user == app.user %}
 		<div class="action-card-comment d-flex align-items-center small">
+		
 			<a href="{{ path('app_commentaire_editer', { 'id_classedecours' : commentaire.cours.classeDeCours.id ,'id_cours' : commentaire.cours.id, 'id_commentaire' : commentaire.id }) }}" class="card-comment-link">
 				Modifier
 			</a>

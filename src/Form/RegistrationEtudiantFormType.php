@@ -45,7 +45,7 @@ class RegistrationEtudiantFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Ce champ ne doit pas être inférieure à {{ limit }} caractères !',
+                        'minMessage' => 'Le mot de passe ne doit pas être inférieure à {{ limit }} caractères.',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
